@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<ArrayOfCourse>
+	<Course>
+		<Name>InformationTheory</Name>
+		<Id>0</Id>
+	</Course>
+	<Course>
+		<Name>OscillationTheory</Name>
+		<Id>1</Id>
+	</Course>
+	<Course>
+		<Name>TheoreticalPhysics</Name>
+		<Id>2</Id>
+	</Course>
+	<Course>
+		<Name>NuclearPhysics</Name>
+		<Id>3</Id>
+	</Course>
+	<Course>
+		<Name>MicrowaveElectronics</Name>
+		<Id>4</Id>
+	</Course>
+	<Course>
+		<Name>Biochemistry</Name>
+		<Id>5</Id>
+	</Course>
+	<Course>
+		<Name>Physiology</Name>
+		<Id>6</Id>
+	</Course>
+	<Course>
+		<Name>Psychology</Name>
+		<Id>7</Id>
+	</Course>
+	<Course>
+		<Name>Immunology</Name>
+		<Id>8</Id>
+	</Course>
+	<Course>
+		<Name>PhysicalEducation</Name>
+		<Id>9</Id>
+	</Course>
+	<Course>
+		<Name>Programming</Name>
+		<Id>10</Id>
+	</Course>
+</ArrayOfCourse>

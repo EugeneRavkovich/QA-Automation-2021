@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<ArrayOfSpecialization>
+	<Specialization>
+		<Name>Radiophysics</Name>
+		<Id>0</Id>
+		<CourseId>
+			<int>0</int>
+			<int>1</int>
+			<int>2</int>
+			<int>3</int>
+			<int>4</int>
+			<int>9</int>
+		</CourseId>
+	</Specialization>
+	<Specialization>
+		<Name>ComputerSecurity</Name>
+		<Id>1</Id>
+		<CourseId>
+			<int>0</int>
+			<int>10</int>
+			<int>9</int>
+		</CourseId>
+	</Specialization>
+	<Specialization>
+		<Name>NuclearPhysics</Name>
+		<Id>2</Id>
+		<CourseId>
+			<int>2</int>
+			<int>3</int>
+			<int>9</int>
+		</CourseId>
+	</Specialization>
+	<Specialization>
+		<Name>TheoreticalPhysics</Name>
+		<Id>3</Id>
+		<CourseId>
+			<int>0</int>
+			<int>2</int>
+			<int>9</int>
+		</CourseId>
+	</Specialization>
+	<Specialization>
+		<Name>PreventiveMedicine</Name>
+		<Id>4</Id>
+		<CourseId>
+			<int>5</int>
+			<int>6</int>
+			<int>8</int>
+			<int>9</int>
+		</CourseId>
+</Specialization>
+	<Specialization>
+		<Name>Pediatrics</Name>
+		<Id>5</Id>
+		<CourseId>
+			<int>5</int>
+			<int>7</int>
+			<int>9</int>
+		</CourseId>
+</Specialization>
+</ArrayOfSpecialization>
