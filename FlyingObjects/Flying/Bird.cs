@@ -4,8 +4,6 @@ namespace InterfacesAndAbstractClasses
 {
     public class Bird: IFlyable
     {
-        readonly int _restoreTime = 1;
-
         /// <summary>
         /// Current position of a bird
         /// </summary>
