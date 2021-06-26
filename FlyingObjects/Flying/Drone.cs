@@ -2,7 +2,7 @@
 
 namespace InterfacesAndAbstractClasses
 {
-    class Drone: IFlyable
+    public class Drone: IFlyable
     {
         private readonly double _stopPeriod = 1d / 6;
         private readonly double _stopTime = 1d / 60;
@@ -49,7 +49,7 @@ namespace InterfacesAndAbstractClasses
             }
             else 
             {
-                throw new Exception("Drone can't fly that far");
+                throw new ArgumentException("Drone can't fly that far");
             }
         }
 
@@ -59,14 +59,13 @@ namespace InterfacesAndAbstractClasses
         /// </summary>
         /// <param name="nextPoint">Destination point</param>
         /// <returns>Flight time</returns>
-        public TimeSpan GetFlyTime(Coordinate nextPoint) 
+        public TimeSpan GetFlyTime(Coordinate nextPoint)
         {
-            if (!IsCanFlyTo(nextPoint)) 
+            if (!IsCanFlyTo(nextPoint))
             {
                 throw new ArgumentException("Drone can't fly that far");
             }
             double wholeDistance = CurrentPosition.CalculateDistance(nextPoint);
-            //double wholeDistance = 36;
             double currentDistance = 0;
             double time = 0;
             while (wholeDistance - currentDistance > double.Epsilon)
@@ -75,8 +74,12 @@ namespace InterfacesAndAbstractClasses
                 time += _stopPeriod + _stopTime; ;
 
             }
-            time -= _stopTime;
+            if (time > 0)
+            {
+                time -= _stopTime;
+            }
             time -= Math.Abs(currentDistance - wholeDistance) / Speed;
+            
             return TimeSpan.FromHours(time);
         }
 
@@ -86,9 +89,10 @@ namespace InterfacesAndAbstractClasses
         /// </summary>
         /// <param name="nextPoint">Destination point</param>
         /// <returns>The ability to overcome that distance</returns>
-        private bool IsCanFlyTo(Coordinate nextPoint)
+        public bool IsCanFlyTo(Coordinate nextPoint)
         {
-            return MaxDistance - CurrentPosition.CalculateDistance(nextPoint) >= double.Epsilon; 
+            return MaxDistance >= CurrentPosition.CalculateDistance(nextPoint) &&
+                   Speed > 0;
         }
     }
 }

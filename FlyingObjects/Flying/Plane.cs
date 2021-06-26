@@ -2,7 +2,7 @@
 
 namespace InterfacesAndAbstractClasses
 {
-    class Plane: IFlyable
+    public class Plane: IFlyable
     {
         private readonly int _startSpeed = 200;
         private readonly int _speedIncrement = 10;
@@ -58,7 +58,7 @@ namespace InterfacesAndAbstractClasses
             }
             else
             {
-                throw new Exception("Not enough fuel");
+                throw new ArgumentException("Not enough fuel");
             }
         
         }
@@ -98,10 +98,10 @@ namespace InterfacesAndAbstractClasses
         /// </summary>
         /// <param name="nextPoint">Destination point</param>
         /// <returns>The ability to overcome that distance</returns>
-        private bool IsCanFlyTo(Coordinate nextPoint) 
+        public bool IsCanFlyTo(Coordinate nextPoint) 
         {
-            return (TankCapacity / FuelConsumption) * 1000 -
-                   CurrentPosition.CalculateDistance(nextPoint) >= double.Epsilon;
+            return (TankCapacity / FuelConsumption) * 1000 >=
+                    CurrentPosition.CalculateDistance(nextPoint);
         }
     }
 }

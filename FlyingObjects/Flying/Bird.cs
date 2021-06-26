@@ -14,7 +14,7 @@ namespace InterfacesAndAbstractClasses
         /// <summary>
         /// Bird's speed, measured in km/h
         /// </summary>
-        public float Speed { get; private set; }
+        public float Speed { get;  set; }
 
         /// <summary>
         /// The maximum distance that bird can cover, measured in km
@@ -47,7 +47,7 @@ namespace InterfacesAndAbstractClasses
             }
             else 
             {
-                throw new Exception("Bird can't fly that far");
+                throw new ArgumentException("Bird can't fly that far");
             }
         }
 
@@ -59,16 +59,13 @@ namespace InterfacesAndAbstractClasses
         /// <returns>Flight time</returns>
         public TimeSpan GetFlyTime(Coordinate nextPoint) 
         {
+            if (!IsCanFlyTo(nextPoint))
+            {
+                throw new ArgumentException("Bird can't fly that far");
+            }
             double distance = CurrentPosition.CalculateDistance(nextPoint);
-            var time =  TimeSpan.FromHours(distance / Speed);
-            if (IsCanFlyTo(nextPoint))
-            {
-                return time;
-            }
-            else 
-            {
-                return time + TimeSpan.FromHours(_restoreTime);
-            }
+            return TimeSpan.FromHours(distance / Speed);
+
         }
 
 
@@ -77,9 +74,10 @@ namespace InterfacesAndAbstractClasses
         /// </summary>
         /// <param name="nextPoint">Destination point</param>
         /// <returns>The ability to overcome that distance</returns>
-        private bool IsCanFlyTo(Coordinate nextPoint) 
+        public bool IsCanFlyTo(Coordinate nextPoint) 
         {
-            return MaxDistance - CurrentPosition.CalculateDistance(nextPoint) >= double.Epsilon;
+            return MaxDistance >= CurrentPosition.CalculateDistance(nextPoint) &&
+                   Speed > 0;
         }
     }
 }
