@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Text;
 
-
 namespace NumeralSystems
 {
+    /// <summary>
+    /// Contains a method for converting a decimal number to another numeral system
+    /// </summary>
     public static class Converter
     {
         public static char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
-
+        public static int loverBaseLimit = 2;
+        public static int upperBaseLimit = 20;
 
         /// <summary>
         /// Converts a decimal number to the specified numeral system
@@ -17,13 +20,16 @@ namespace NumeralSystems
         /// <returns>Converted number in string</returns>
         public static string Convert(int number, int systemBase) 
         {
-            if (systemBase < 2 || systemBase > 20) 
+            if (systemBase < loverBaseLimit || systemBase > upperBaseLimit) 
             {
-                throw new Exception("Numeral system base must belong to [2, 20]");
+                throw new Exception($"Numeral system base must belong to [{loverBaseLimit}, {upperBaseLimit}]");
             }
 
-            if (number == 0) return "0";
-
+            if (number == 0) 
+            {
+                return "0";
+            }
+            
             StringBuilder convertedNumber = new StringBuilder();
 
             string sign = GetSign(number);
@@ -48,9 +54,7 @@ namespace NumeralSystems
         /// <returns>Equivalent char or corresponding letter</returns>
         private static char GetRemainder(int remainder) 
         {
-            //return remainder >= 10 ? letters[remainder % 10] : 
-            //       (char)(remainder + '0'); 
-            remainder = RemoveSign(remainder);
+            remainder = RemoveSign(remainder);  // this is added for correct conversion of int.MinValue 
             return remainder >= 10 ? letters[remainder % 10] :
                    (char)(remainder + '0');
         }
