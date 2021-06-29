@@ -13,6 +13,7 @@ namespace TheLongestSequence.Tests
         [DataRow("12312", 3)]
         [DataRow("1111", 1)]
         [DataRow("    ", 1)]
+        [DataRow("", 0)]
         public void GetSubstringLengthCheckPositive(string input, int expectedLength) 
         {
             Assert.AreEqual(expectedLength, UniqueSequenceFinder.GetSubstringLength(input));
@@ -23,6 +24,7 @@ namespace TheLongestSequence.Tests
         [DataRow("absdfetaj", 8)]
         [DataRow("asporas", 5)]
         [DataRow("arrownrra", 4)]
+        [DataRow("", 0)]
         public void GetTheLongestUniqueSubsequenceCheckPositive(string input, int expectedLength)
         {
             Assert.AreEqual(expectedLength, UniqueSequenceFinder.GetTheLongestUniqueSubsequenceLength(input));
@@ -31,15 +33,7 @@ namespace TheLongestSequence.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetTheLongestUniqueSubsequenceWithEmptyInputNegative()
-        {
-            string.Empty.GetTheLongestUniqueSubsequenceLength();
-        }
-
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetTheLongestSubsequenceWithNullInputNegative() 
+        public void GetTheLongestSubsequenceWithNullInputPositive() 
         {
             string input = null;
             input.GetTheLongestUniqueSubsequenceLength();

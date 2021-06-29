@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace TheLongestSequence
 {
+    /// <summary>
+    /// Сontains methods for finding the longest subsequence in an input string
+    /// </summary>
     public static class UniqueSequenceFinder
     {
         /// <summary>
@@ -13,7 +16,7 @@ namespace TheLongestSequence
         /// <returns>Length of the longest unique subsequence</returns>
         public static int GetTheLongestUniqueSubsequenceLength(this string inputSequence) 
         {
-            if (string.IsNullOrEmpty(inputSequence)) 
+            if(inputSequence is null)
             {
                 throw new ArgumentException();
             }
