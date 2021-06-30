@@ -37,6 +37,11 @@ namespace VehicleFleet
         /// <returns>List of vehicles</returns>
         public List<Vehicle> GetVehiclesWithEngineVolumeGreaterThan(double volumeLoverLimit) 
         {
+            if (Vehicles is null) 
+            {
+                return new List<Vehicle>();
+            }
+
             return (from vehicle in Vehicles
                     where vehicle.Engine.Volume > volumeLoverLimit
                     select vehicle).ToList();
@@ -49,6 +54,11 @@ namespace VehicleFleet
         /// <returns>List of engines</returns>
         public List<Engine> GetEnginesOfBussesAndTrucks() 
         {
+            if (Vehicles is null) 
+            {
+                return new List<Engine>();
+            }
+
             return (from vehicle in Vehicles
                     where vehicle is Bus || vehicle is Truck
                     select vehicle.Engine).ToList();
@@ -61,6 +71,11 @@ namespace VehicleFleet
         /// <returns>List of vehicles</returns>
         public List<Vehicle> GroupByTransmission() 
         {
+            if (Vehicles is null) 
+            {
+                return new List<Vehicle>();
+            }
+
             return (from vehicle in Vehicles
                     group vehicle by vehicle.Transmission.Type into groups
                     from _group in groups.ToList()

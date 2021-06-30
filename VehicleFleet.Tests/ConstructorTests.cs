@@ -4,7 +4,7 @@ using System;
 namespace VehicleFleet.Tests
 {
     [TestClass]
-    public class VehicleFleetTests
+    public class ConstructorTests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
