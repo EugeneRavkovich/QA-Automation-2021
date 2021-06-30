@@ -5,6 +5,7 @@ namespace VehicleFleet
     /// <summary>
     /// Class that defines a truck object
     /// </summary>
+    [Serializable]
     public class Truck : Vehicle
     {
         /// <summary>
@@ -30,6 +31,12 @@ namespace VehicleFleet
                 _loadCapacity = value;
             }
         }
+
+
+        /// <summary>
+        /// Constructor w/o parameters
+        /// </summary>
+        public Truck() { }
 
 
         /// <summary>

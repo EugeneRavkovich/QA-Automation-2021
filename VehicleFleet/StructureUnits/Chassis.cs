@@ -5,6 +5,7 @@ namespace VehicleFleet
     /// <summary>
     /// Class that defines a chassis object
     /// </summary>
+    [Serializable]
     public class Chassis
     {
         /// <summary>
@@ -59,6 +60,12 @@ namespace VehicleFleet
         /// Chassis serial number
         /// </summary>
         public string SerialNumber { get; set; }
+
+
+        /// <summary>
+        /// Constructor w/o parameters
+        /// </summary>
+        public Chassis() { }
 
 
         /// <summary>

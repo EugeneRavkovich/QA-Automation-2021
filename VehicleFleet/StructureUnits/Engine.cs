@@ -5,6 +5,7 @@ namespace VehicleFleet
     /// <summary>
     /// Class that defines an egine object
     /// </summary>
+    [Serializable]
     public class Engine
     {
         /// <summary>
@@ -64,6 +65,12 @@ namespace VehicleFleet
         /// Engine serial number
         /// </summary>
         public string SerialNumber { get; set; }
+
+
+        /// <summary>
+        /// Constructro w/o parameters
+        /// </summary>
+        public Engine() { }
 
 
         /// <summary>

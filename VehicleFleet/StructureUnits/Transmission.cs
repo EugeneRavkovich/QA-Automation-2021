@@ -5,6 +5,7 @@ namespace VehicleFleet
     /// <summary>
     /// Class that defines a transmission object
     /// </summary>
+    [Serializable]
     public class Transmission
     {
         /// <summary>
@@ -40,6 +41,12 @@ namespace VehicleFleet
         /// Transmission manufacturer
         /// </summary>
         public string Manufacturer { get; set; }
+
+
+        /// <summary>
+        /// Constructor w/o parameters
+        /// </summary>
+        public Transmission() { }
 
 
         /// <summary>

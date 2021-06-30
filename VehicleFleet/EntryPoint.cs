@@ -31,6 +31,11 @@ namespace VehicleFleet
 
                 VehicleFleet park = new VehicleFleet(new List<Vehicle> { passengerCar, truck, bus, scooter });
                 Console.Write(park.ToString());
+
+                Serializer<VehicleFleet>.Serialize("../../../XMLFiles/CollectionOfAllVehicles.xml", park);
+                Serializer<Vehicle>.Serialize("../../../XMLFiles/VehiclesWithEngineVolumeGreaterThan1.5.xml", park.GetVehiclesWithEngineVolumeGreaterThan(1.5));
+                Serializer<Engine>.Serialize("../../../XMLFiles/EnginesOfBussesAndTrucks.xml", park.GetEnginesOfBussesAndTrucks());
+                Serializer<Vehicle>.Serialize("../../../XMLFiles/VehiclesGroupedByTransmission.xml", park.GroupByTransmission());
             }
             catch (Exception e) 
             {

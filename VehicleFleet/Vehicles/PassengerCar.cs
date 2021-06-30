@@ -5,6 +5,7 @@ namespace VehicleFleet
     /// <summary>
     /// Class that defines a passenger car object
     /// </summary>
+    [Serializable]
     public class PassengerCar : Vehicle
     {
         /// <summary>
@@ -30,6 +31,12 @@ namespace VehicleFleet
                 _passengersQuantity = value;
             }
         }
+
+
+        /// <summary>
+        /// Constructor w/o parameters
+        /// </summary>
+        public PassengerCar() { }
 
 
         /// <summary>

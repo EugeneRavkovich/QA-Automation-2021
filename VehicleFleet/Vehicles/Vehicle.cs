@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace VehicleFleet
 {
     /// <summary>
     /// Class that defines the entity of the vehicle for inheritance
     /// </summary>
+    [XmlInclude(typeof(Bus))]
+    [XmlInclude(typeof(PassengerCar))]
+    [XmlInclude(typeof(Scooter))]
+    [XmlInclude(typeof(Truck))]
+    [Serializable]
     public abstract class Vehicle
     {
         /// <summary>
@@ -21,6 +27,12 @@ namespace VehicleFleet
         /// Vehicle transmission
         /// </summary>
         public Transmission Transmission { get; set; }
+
+
+        /// <summary>
+        /// Constructor w/o parameters
+        /// </summary>
+        public Vehicle() { }
 
 
         /// <summary>

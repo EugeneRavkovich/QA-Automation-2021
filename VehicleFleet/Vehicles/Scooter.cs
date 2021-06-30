@@ -5,6 +5,7 @@ namespace VehicleFleet
     /// <summary>
     /// Class that defines a scooter object
     /// </summary>
+    [Serializable]
     public class Scooter : Vehicle
     {
         /// <summary>
@@ -30,6 +31,12 @@ namespace VehicleFleet
                 _maxSpeed = value;
             }
         }
+
+
+        /// <summary>
+        /// Constructor w/o parameters
+        /// </summary>
+        public Scooter() { }
 
 
         /// <summary>

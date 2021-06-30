@@ -1,14 +1,23 @@
-﻿namespace VehicleFleet
+﻿using System;
+
+namespace VehicleFleet
 {
     /// <summary>
     /// Class that defines a bus object
     /// </summary>
+    [Serializable]
     public class Bus : Vehicle
     {
         /// <summary>
         /// Bus route number
         /// </summary>
         public string RouteNumber { get; set; }
+
+
+        /// <summary>
+        /// Constructor w/o parameters
+        /// </summary>
+        public Bus() { }
 
 
         /// <summary>
