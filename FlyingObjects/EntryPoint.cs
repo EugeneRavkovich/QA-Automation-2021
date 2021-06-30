@@ -8,9 +8,17 @@ namespace InterfacesAndAbstractClasses
         {
             try
             {
-                Bird bird = new Bird(new Coordinate(0, 0, 0), 10);
-                Drone drone = new Drone(new Coordinate(0, 0, 0), 36, 36);
-                Plane plane = new Plane(new Coordinate(0, 0, 0), 5000, 5000, 1000);
+                IFlyable[] flyingObjects =
+                {
+                    new Bird(new Coordinate(0, 0, 0), 20),
+                    new Drone(new Coordinate(0, 0, 0), 36, 36),
+                    new Plane(new Coordinate(0, 0, 0), 5000, 5000, 1000)
+                };
+
+                foreach (var obj in flyingObjects) 
+                {
+                    Console.WriteLine(obj.GetFlyTime(new Coordinate(10, 10, 10)));
+                }
             }
             catch (Exception e) 
             {

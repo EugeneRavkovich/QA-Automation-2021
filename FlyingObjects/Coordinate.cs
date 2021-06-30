@@ -2,6 +2,9 @@
 
 namespace InterfacesAndAbstractClasses
 {
+    /// <summary>
+    /// Structure that defines a coordinate
+    /// </summary>
     public struct Coordinate
     {
         private double _x;
@@ -21,12 +24,9 @@ namespace InterfacesAndAbstractClasses
             {
                 throw new ArgumentException($"\nPoint ({x}, {y}, {z}): Only positive coordinates are allowed");
             }
-            else 
-            {
-                this._x = x;
-                this._y = y;
-                this._z = z;
-            }  
+            this._x = x;
+            this._y = y;
+            this._z = z;   
         }
 
 

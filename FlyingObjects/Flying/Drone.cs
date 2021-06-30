@@ -2,10 +2,24 @@
 
 namespace InterfacesAndAbstractClasses
 {
+    /// <summary>
+    /// Class that defines a drone object
+    /// </summary>
     public class Drone: IFlyable
     {
         private readonly double _stopPeriod = 1d / 6;
+
         private readonly double _stopTime = 1d / 60;
+
+        /// <summary>
+        /// The maximum distance that drone can cover, measured in km
+        /// </summary>
+        private double _maxDistance;
+
+        /// <summary>
+        /// Drone's speed, measured in km/h
+        /// </summary>
+        private double _speed;
 
         /// <summary>
         /// Current position of a drone
@@ -13,14 +27,42 @@ namespace InterfacesAndAbstractClasses
         public Coordinate CurrentPosition { get; private set; }
 
         /// <summary>
-        /// The maximum distance that drone can cover, measured in km
+        /// Method for setting and getting the _maxDistance field value
         /// </summary>
-        public double MaxDistance { get; set; }
+        public double MaxDistance 
+        {
+            get 
+            {
+                return _maxDistance;
+            }
+            private set 
+            {
+                if (value < 0) 
+                {
+                    throw new ArgumentException($"{this.GetType()}: The maximum distance can't be negative");
+                }
+                _maxDistance = value;
+            }
+        }
 
         /// <summary>
-        /// Drone's speed, measured in km/h
+        /// Method for setting and getting the _speed field value
         /// </summary>
-        public double Speed { get; set; }
+        public double Speed 
+        {
+            get 
+            {
+                return _speed;    
+            }
+            set 
+            {
+                if (value < 0) 
+                {
+                    throw new ArgumentException($"{this.GetType()}: Speed can't be negative");
+                }
+                _speed = value;
+            }
+        }
 
 
         /// <summary>

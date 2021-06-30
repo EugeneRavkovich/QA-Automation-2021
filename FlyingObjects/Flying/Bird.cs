@@ -2,9 +2,20 @@
 
 namespace InterfacesAndAbstractClasses
 {
+    /// <summary>
+    /// Class that defines a bird object
+    /// </summary>
     public class Bird: IFlyable
     {
-        readonly int _restoreTime = 1;
+        /// <summary>
+        /// Bird's speed, measured in km/h
+        /// </summary>
+        private float _speed;
+
+        /// <summary>
+        /// The maximum distance that bird can cover, measured in km
+        /// </summary>
+        private double _maxDistance;
 
         /// <summary>
         /// Current position of a bird
@@ -12,14 +23,42 @@ namespace InterfacesAndAbstractClasses
         public Coordinate CurrentPosition { get; private set; }
 
         /// <summary>
-        /// Bird's speed, measured in km/h
+        /// Method for setting and getting the _speed field value
         /// </summary>
-        public float Speed { get;  set; }
+        public float Speed 
+        {
+            get 
+            {
+                return _speed;    
+            }
+            set 
+            {
+                if (value < 0) 
+                {
+                    throw new ArgumentException($"{this.GetType()}: Speed can't be negative");
+                }
+                _speed = value;
+            }
+        }
 
         /// <summary>
-        /// The maximum distance that bird can cover, measured in km
+        /// Method for setting and getting the _maxDistance field value
         /// </summary>
-        public double MaxDistance { get; private set; }
+        public double MaxDistance 
+        {
+            get 
+            {
+                return _maxDistance;
+            }
+            private set 
+            {
+                if (value < 0) 
+                {
+                    throw new ArgumentException($"{this.GetType()}: The maximum distance can't be negative");
+                }
+                _maxDistance = value;
+            }
+        }
         
 
         /// <summary>

@@ -2,6 +2,9 @@
 
 namespace InterfacesAndAbstractClasses
 {
+    /// <summary>
+    /// Class that defines a plane object
+    /// </summary>
     public class Plane: IFlyable
     {
         private readonly int _startSpeed = 200;
@@ -9,24 +12,81 @@ namespace InterfacesAndAbstractClasses
         private readonly int _speedIncrementDistance = 10;
 
         /// <summary>
+        /// Plane's tank capacity, measured in litres
+        /// </summary>
+        private double _tankCapacity;
+
+        /// <summary>
+        /// Plane's fuel consumption, measured in litres per thousand kilometers
+        /// </summary>
+        private double _fuelConsumption;
+
+        /// <summary>
+        /// Plane's maximum speed, measured in km/h
+        /// </summary>
+        private double _maxSpeed;
+
+        /// <summary>
         /// Current position of a plane
         /// </summary>
         public Coordinate CurrentPosition { get; private set; }
 
         /// <summary>
-        /// Plane's tank capacity, measured in litres
+        /// Method for setting and getting the _tankCapacity field value
         /// </summary>
-        public double TankCapacity { get; private set; }
+        public double TankCapacity 
+        {
+            get 
+            {
+                return _tankCapacity;
+            }
+            private set 
+            {
+                if (value <= 0) 
+                {
+                    throw new ArgumentException($"{this.GetType()}: Tank capacity must be greater than 0");
+                }
+                _tankCapacity = value;
+            }
+        }
 
         /// <summary>
-        /// Plane's fuel consumption, measured in litres per thousand kilometers
+        /// Method for setting and getting the _fuelConsumption field value
         /// </summary>
-        public double FuelConsumption { get; private set; }
+        public double FuelConsumption 
+        {
+            get 
+            {
+                return _fuelConsumption;
+            }
+            private set
+            {
+                if (value <= 0) 
+                {
+                    throw new ArgumentException($"{this.GetType()}: Fuel consumption must be greater than 0");
+                }
+                _fuelConsumption = value;
+            }
+        }
 
         /// <summary>
-        /// Plane's maximum speed, measured in km/h
+        /// Method for setting and getting the _maxSpeed field value
         /// </summary>
-        public double MaxSpeed { get; private set; }
+        public double MaxSpeed 
+        {
+            get 
+            {
+                return _maxSpeed;    
+            }
+            private set
+            {
+                if (value < _startSpeed) 
+                {
+                    throw new ArgumentException($"{this.GetType()}: The maximum speed can't be less than start speed");
+                }
+                _maxSpeed = value;
+            } 
+        }
 
 
         /// <summary>
