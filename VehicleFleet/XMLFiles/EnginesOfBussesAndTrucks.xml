@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ArrayOfEngine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Engine>
+    <Power>350</Power>
+    <Volume>5</Volume>
+    <Type>Petrol</Type>
+    <SerialNumber>T2103I</SerialNumber>
+  </Engine>
+  <Engine>
+    <Power>160</Power>
+    <Volume>5</Volume>
+    <Type>Diesel</Type>
+    <SerialNumber>I3333U</SerialNumber>
+  </Engine>
+</ArrayOfEngine>
