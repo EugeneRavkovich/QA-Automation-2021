@@ -14,6 +14,16 @@ namespace VehicleFleet
     public abstract class Vehicle
     {
         /// <summary>
+        /// The sequential number of the object assigned at creation
+        /// </summary>
+        private static int _id;
+
+        /// <summary>
+        /// Method for setting and getting the _id field value
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Vehicle engine
         /// </summary>
         public Engine Engine { get; set; }
@@ -45,7 +55,8 @@ namespace VehicleFleet
         {
             this.Engine = engine ?? throw new InitializationException("The vehicle must contain an engine");
             this.Chassis = chassis ?? throw new InitializationException("The vehicle must contain a chassis");
-            this.Transmission = transmission ?? throw new InitializationException("The vehicle must contain a transmission") ;
+            this.Transmission = transmission ?? throw new InitializationException("The vehicle must contain a transmission");
+            Id = _id++;
         }
 
 

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <ArrayOfVehicle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Vehicle xsi:type="PassengerCar">
+    <Id>0</Id>
     <Engine>
       <Power>230</Power>
       <Volume>3.2</Volume>
@@ -20,6 +21,7 @@
     <PassengersQuantity>4</PassengersQuantity>
   </Vehicle>
   <Vehicle xsi:type="Bus">
+    <Id>2</Id>
     <Engine>
       <Power>160</Power>
       <Volume>5</Volume>
@@ -39,6 +41,7 @@
     <RouteNumber>144c</RouteNumber>
   </Vehicle>
   <Vehicle xsi:type="Scooter">
+    <Id>3</Id>
     <Engine>
       <Power>60</Power>
       <Volume>1.2</Volume>
@@ -58,6 +61,7 @@
     <MaxSpeed>120</MaxSpeed>
   </Vehicle>
   <Vehicle xsi:type="Truck">
+    <Id>1</Id>
     <Engine>
       <Power>350</Power>
       <Volume>5</Volume>
