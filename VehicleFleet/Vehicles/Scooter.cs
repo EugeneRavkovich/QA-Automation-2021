@@ -26,7 +26,7 @@ namespace VehicleFleet
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException($"{this.GetType()}: The maximum speed must be greater than 0");
+                    throw new InitializationException($"{this.GetType()}: The maximum speed must be greater than 0");
                 }
                 _maxSpeed = value;
             }

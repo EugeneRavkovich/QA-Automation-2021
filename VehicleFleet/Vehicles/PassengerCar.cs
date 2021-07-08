@@ -26,7 +26,7 @@ namespace VehicleFleet
             {
                 if (value < 0 || value > 4) 
                 {
-                    throw new ArgumentException($"{this.GetType()}: Passenger car can carry up to 4 passengers");
+                    throw new InitializationException($"{this.GetType()}: Passenger car can carry up to 4 passengers");
                 }
                 _passengersQuantity = value;
             }

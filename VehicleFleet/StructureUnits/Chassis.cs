@@ -31,7 +31,7 @@ namespace VehicleFleet
             {
                 if (value < 2) 
                 {
-                    throw new ArgumentException($"{this.GetType()}: There can't be less than 2 wheels");
+                    throw new InitializationException($"{this.GetType()}: There can't be less than 2 wheels");
                 }
                 _wheelsQuantity = value;
             }
@@ -50,7 +50,7 @@ namespace VehicleFleet
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException($"{this.GetType()}: permissible load must be greater than 0");
+                    throw new InitializationException($"{this.GetType()}: permissible load must be greater than 0");
                 }
                 _permissibleLoad = value;
             }

@@ -43,9 +43,9 @@ namespace VehicleFleet
         /// <param name="transmission">Vehicle transmission</param>
         public Vehicle(Engine engine, Chassis chassis, Transmission transmission)
         {
-            this.Engine = engine ?? throw new ArgumentException("The vehicle must contain an engine");
-            this.Chassis = chassis ?? throw new ArgumentException("The vehicle must contain a chassis");
-            this.Transmission = transmission ?? throw new ArgumentException("The vehicle must contain a transmission") ;
+            this.Engine = engine ?? throw new InitializationException("The vehicle must contain an engine");
+            this.Chassis = chassis ?? throw new InitializationException("The vehicle must contain a chassis");
+            this.Transmission = transmission ?? throw new InitializationException("The vehicle must contain a transmission") ;
         }
 
 

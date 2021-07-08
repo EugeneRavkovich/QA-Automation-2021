@@ -26,7 +26,7 @@ namespace VehicleFleet
             {
                 if (value < 3)
                 {
-                    throw new ArgumentException($"{this.GetType()}: Transmission can't have less than 3 gears");
+                    throw new InitializationException($"{this.GetType()}: Transmission can't have less than 3 gears");
                 }
                 _gearsQuantity = value;
             }

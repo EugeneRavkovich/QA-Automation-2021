@@ -26,7 +26,7 @@ namespace VehicleFleet
             {
                 if (value <= 0 || value > 30)
                 {
-                    throw new ArgumentException($"{this.GetType()}: Truck can carry cargo weighing up to 30 tonns");
+                    throw new InitializationException($"{this.GetType()}: Truck can carry cargo weighing up to 30 tonns");
                 }
                 _loadCapacity = value;
             }

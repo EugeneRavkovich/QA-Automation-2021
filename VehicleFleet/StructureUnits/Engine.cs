@@ -31,7 +31,7 @@ namespace VehicleFleet
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException($"{this.GetType()}: Engine power must be greater than 0");
+                    throw new InitializationException($"{this.GetType()}: Engine power must be greater than 0");
                 }
                 _power = value;
             }
@@ -50,7 +50,7 @@ namespace VehicleFleet
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException($"{this.GetType()}: Engine volume must be greater than 0");
+                    throw new InitializationException($"{this.GetType()}: Engine volume must be greater than 0");
                 }
                 _volume = value;
             }
