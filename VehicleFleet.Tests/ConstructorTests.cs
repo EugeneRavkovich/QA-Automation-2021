@@ -7,7 +7,7 @@ namespace VehicleFleet.Tests
     public class ConstructorTests
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InitializationException))]
         public void TryToCreateCarWithoutEngine()
         {
             Vehicle car = new PassengerCar(
@@ -18,7 +18,7 @@ namespace VehicleFleet.Tests
 
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InitializationException))]
         public void TryToCreateCarWithoutChassis()
         {
             Vehicle car = new PassengerCar(
@@ -29,7 +29,7 @@ namespace VehicleFleet.Tests
 
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InitializationException))]
         public void TryToCreateCarWithoutTransmission()
         {
             Vehicle car = new PassengerCar(

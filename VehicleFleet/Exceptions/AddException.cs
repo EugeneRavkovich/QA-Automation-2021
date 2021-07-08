@@ -2,7 +2,7 @@
 
 namespace VehicleFleet
 {
-    class AddException: Exception
+    public class AddException: Exception
     {
         public AddException() { }
         public AddException(string message) : base(message) { }
