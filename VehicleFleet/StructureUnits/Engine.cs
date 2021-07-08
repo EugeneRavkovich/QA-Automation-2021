@@ -21,15 +21,15 @@ namespace VehicleFleet
         /// <summary>
         /// Method for setting and getting the _power field value
         /// </summary>
-        public int Power 
+        public int Power
         {
-            get 
+            get
             {
-                return _power;    
+                return _power;
             }
-            set 
+            set
             {
-                if (value <= 0) 
+                if (value <= 0)
                 {
                     throw new ArgumentException($"{this.GetType()}: Engine power must be greater than 0");
                 }
@@ -40,15 +40,15 @@ namespace VehicleFleet
         /// <summary>
         /// Method for setting and getting the _volume field value
         /// </summary>
-        public double Volume 
+        public double Volume
         { 
             get
             {
                 return _volume;
             }
-            set 
+            set
             {
-                if (value <= 0) 
+                if (value <= 0)
                 {
                     throw new ArgumentException($"{this.GetType()}: Engine volume must be greater than 0");
                 }

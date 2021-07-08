@@ -16,13 +16,13 @@ namespace VehicleFleet
         /// <summary>
         /// Method for setting and getting the _maxSpeed field value
         /// </summary>
-        public double MaxSpeed 
+        public double MaxSpeed
         {
-            get 
+            get
             {
-                return _maxSpeed;    
+                return _maxSpeed;
             }
-            set 
+            set
             {
                 if (value <= 0)
                 {

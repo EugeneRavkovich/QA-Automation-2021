@@ -16,15 +16,15 @@ namespace VehicleFleet
         /// <summary>
         /// Method for setting and getting the _loadCapacity field value
         /// </summary>
-        public double LoadCapacity 
+        public double LoadCapacity
         {
-            get 
+            get
             {
                 return _loadCapacity;
             }
-            set 
+            set
             {
-                if (value <= 0 || value > 30) 
+                if (value <= 0 || value > 30)
                 {
                     throw new ArgumentException($"{this.GetType()}: Truck can carry cargo weighing up to 30 tonns");
                 }

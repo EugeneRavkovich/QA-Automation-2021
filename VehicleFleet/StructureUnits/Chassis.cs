@@ -23,11 +23,11 @@ namespace VehicleFleet
         /// </summary>
         public int WheelsQuantity
         {
-            get 
+            get
             {
-                return _wheelsQuantity;    
+                return _wheelsQuantity;
             }
-            set 
+            set
             {
                 if (value < 2) 
                 {
@@ -40,15 +40,15 @@ namespace VehicleFleet
         /// <summary>
         /// Method for setting and getting the _permissiobleLoad field value
         /// </summary>
-        public double PermissibleLoad 
+        public double PermissibleLoad
         {
-            get 
+            get
             {
-                return _permissibleLoad;    
+                return _permissibleLoad;
             }
-            set 
+            set
             {
-                if (value <= 0) 
+                if (value <= 0)
                 {
                     throw new ArgumentException($"{this.GetType()}: permissible load must be greater than 0");
                 }

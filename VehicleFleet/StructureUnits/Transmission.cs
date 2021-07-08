@@ -16,15 +16,15 @@ namespace VehicleFleet
         /// <summary>
         /// Method for setting and getting the _gearsQuantity field value
         /// </summary>
-        public int GearsQuantity 
+        public int GearsQuantity
         {
-            get 
+            get
             {
-                return _gearsQuantity;    
+                return _gearsQuantity;
             }
-            set 
+            set
             {
-                if (value < 3) 
+                if (value < 3)
                 {
                     throw new ArgumentException($"{this.GetType()}: Transmission can't have less than 3 gears");
                 }

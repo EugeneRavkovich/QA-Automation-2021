@@ -37,7 +37,7 @@ namespace VehicleFleet
         /// <returns>List of vehicles</returns>
         public List<Vehicle> GetVehiclesWithEngineVolumeGreaterThan(double volumeLoverLimit) 
         {
-            if (Vehicles is null) 
+            if (Vehicles is null)
             {
                 return new List<Vehicle>();
             }
@@ -54,7 +54,7 @@ namespace VehicleFleet
         /// <returns>List of engines</returns>
         public List<Engine> GetEnginesOfBussesAndTrucks() 
         {
-            if (Vehicles is null) 
+            if (Vehicles is null)
             {
                 return new List<Engine>();
             }
@@ -69,9 +69,9 @@ namespace VehicleFleet
         /// Forming a sample of vehicles grouped by transmission
         /// </summary>
         /// <returns>List of vehicles</returns>
-        public List<Vehicle> GroupByTransmission() 
+        public List<Vehicle> GroupByTransmission()
         {
-            if (Vehicles is null) 
+            if (Vehicles is null)
             {
                 return new List<Vehicle>();
             }

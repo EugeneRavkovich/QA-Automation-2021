@@ -16,13 +16,13 @@ namespace VehicleFleet
         /// <summary>
         /// Method for setting and getting the _passengersQuantity field value
         /// </summary>
-        public int PassengersQuantity 
+        public int PassengersQuantity
         {
-            get 
+            get
             {
-                return _passengersQuantity;    
+                return _passengersQuantity;
             }
-            set 
+            set
             {
                 if (value < 0 || value > 4) 
                 {
