@@ -125,7 +125,14 @@ namespace VehicleFleet
             var property = GetParameterByName(vehicle, parameter) ??
                 throw new UpdateAutoException($"Vehicle of the {vehicle.GetType().Name}" +
                 $" type doesn't have parameter {parameter}");
-            property.SetValue(vehicle, value);
+            try
+            {
+                property.SetValue(vehicle, value);
+            }
+            catch (TargetInvocationException e)
+            {
+                throw e.InnerException;
+            }
         }
 
 

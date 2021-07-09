@@ -123,7 +123,6 @@ namespace VehicleFleet.Tests
         }
 
 
-        // broken
         [TestMethod]
         [ExpectedException(typeof(InitializationException))]
         public void UpdateAutoWithWrongValue()
