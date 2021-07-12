@@ -49,6 +49,10 @@ namespace CarFleet
 
         public double GetAveragePrice()
         {
+            if (park.Count == 0)
+            {
+                return 0;
+            }
             return park.Sum(x => x.Price) / (double)park.Count;
         }
 
@@ -56,6 +60,10 @@ namespace CarFleet
         public double GetAveragePriceByBrand(string brand)
         {
             var selection = park.Where(x => x.Brand == brand).ToList();
+            if (selection.Count == 0)
+            {
+                return 0;
+            }
             return selection.Sum(x => x.Price) / (double)selection.Count;
         }
     }
