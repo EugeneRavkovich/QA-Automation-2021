@@ -2,8 +2,14 @@
 
 namespace CarFleet
 {
+    /// <summary>
+    /// Class that defines a command to stop the program
+    /// </summary>
     class ExitCommand: ICommand
     {
+        /// <summary>
+        /// Method for executing the current command
+        /// </summary>
         public void Execute()
         {
             Console.WriteLine("Program terminated");

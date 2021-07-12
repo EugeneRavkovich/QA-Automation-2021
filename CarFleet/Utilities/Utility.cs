@@ -2,8 +2,14 @@
 
 namespace CarFleet
 {
+    /// <summary>
+    /// Utility class with helper methods
+    /// </summary>
     static class Utility
     {
+        /// <summary>
+        /// Method that outputs the instructions to the program
+        /// </summary>
         public static void DisplayWelcomeMessage()
         {
             Console.WriteLine("This is a program for car fleet managment\n" +
