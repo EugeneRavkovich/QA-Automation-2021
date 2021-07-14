@@ -39,7 +39,7 @@ namespace TheLongestSequence
         /// </summary>
         /// <param name="input"></param>
         /// <returns>Length of the first subsequence</returns>
-        public static int GetSubstringLength(string input)
+        private static int GetSubstringLength(string input)
         {
             int subsequenceLength = 0;
             Dictionary<char, bool> map = new Dictionary<char, bool>();
