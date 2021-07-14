@@ -2,7 +2,7 @@
 
 namespace TheLongestSequence
 {
-    class Program
+    class EntryPoint
     {
         static void Main(string[] args)
         {
@@ -19,7 +19,11 @@ namespace TheLongestSequence
             try
             {
                 var maxSubsequenceLength = inputSequence.GetTheLongestUniqueSubsequenceLength();
+                var maxLatinSubsequenceLength = inputSequence.GetTheLongestIdenticalLatinLettersSequenceLength();
+                var maxDigitsSubsequenceLength = inputSequence.GetTheLongestIdenticalDigitsSequenceLength();
                 Console.WriteLine(maxSubsequenceLength);
+                Console.WriteLine(maxLatinSubsequenceLength);
+                Console.WriteLine(maxDigitsSubsequenceLength);
             }
             catch (Exception e) 
             {
