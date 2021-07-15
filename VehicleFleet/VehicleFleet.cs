@@ -39,7 +39,7 @@ namespace VehicleFleet
         {
             if (IsExists(vehicle.Id))
             {
-                throw new AddException("Vehicle with such id already exists");
+                throw new AddException($"Vehicle with such id = {vehicle.Id} already exists");
             }
             else if (vehicle.Engine.Type == EngineType.Electric)
             {
@@ -71,7 +71,7 @@ namespace VehicleFleet
         {
             if (!GetAllParameters().Contains(parameter))
             {
-                throw new GetAutoByParameterException("Wrong parameter");
+                throw new GetAutoByParameterException($"There is no parameter: {parameter}");
             }
             return Vehicles.Where(x => GetParameterValue(x, parameter) == value).ToList();
         }
@@ -121,7 +121,7 @@ namespace VehicleFleet
         public void UpdateAuto(int id, string parameter, object value)
         {
             var vehicle = Vehicles.Find(x => x.Id == id) ??
-                throw new UpdateAutoException("There is no vehicle with such id");
+                throw new UpdateAutoException($"There is no vehicle with such id = {id}");
             var property = GetParameterByName(vehicle, parameter) ??
                 throw new UpdateAutoException($"Vehicle of the {vehicle.GetType().Name}" +
                 $" type doesn't have parameter {parameter}");
@@ -144,7 +144,7 @@ namespace VehicleFleet
         {
             if (!IsExists(id))
             {
-                throw new RemoveAutoException("There is no vehicle with such id");
+                throw new RemoveAutoException($"There is no vehicle with such id = {id}");
             }
             Vehicles.Remove(Vehicles.Find(x => x.Id == id));
         }
