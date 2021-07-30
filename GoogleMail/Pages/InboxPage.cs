@@ -5,9 +5,7 @@ namespace GoogleMail.Pages
 {
     public class InboxPage: BasePage
     {
-        //private const string _lastMessageXpath = "//table[@id=':23']/tbody/tr[1]";
         private const string _lastMessageXpath = "//table[@role='grid']//tr[1]";
-        //private const string _lastMessageXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
 
         private readonly string _driverTitle = "Входящие";
 
@@ -21,8 +19,7 @@ namespace GoogleMail.Pages
 
         private readonly By _lastIncommingMessageLocator = By.XPath(_lastMessageXpath);
 
-        private readonly By _messageAddresseeLocator = By.XPath(_lastMessageXpath +
-            "//span[@name]");
+        private readonly By _messageAddresseeLocator = By.XPath(_lastMessageXpath + "//span[@name!='я']");
 
         private readonly By _messageContent = By.XPath("//div[@class='a3s aiL ']/div[2]/div[1]");
 
@@ -82,7 +79,7 @@ namespace GoogleMail.Pages
         public bool IsCorrectAddressee(string addressee)
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_lastIncommingMessageLocator));
-            var messageAddressee = Driver.FindElement(_messageAddresseeLocator).Text;
+            var messageAddressee = Driver.FindElement(_messageAddresseeLocator).GetAttribute("name");
             return messageAddressee == addressee;
         }
 
