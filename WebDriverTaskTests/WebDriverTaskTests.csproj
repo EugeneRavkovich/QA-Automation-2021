@@ -56,7 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeAliasTests.cs" />
+    <Compile Include="ReplaceAliasTests.cs" />
     <Compile Include="GmailLoginTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendMessageTests.cs" />
