@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using GoogleMail.DriverInstance;
 using GoogleMail.Pages;
+using OpenQA.Selenium.Support.UI;
 
 namespace GoogleMail.Helpers
 {
@@ -9,6 +10,11 @@ namespace GoogleMail.Helpers
         private static IWebDriver _driver;
 
         private static readonly string _baseUrl = "https:/google.com/mail";
+
+        private static By _availableAccountsTabLocator = By.XPath("//a[contains(@aria-label, 'Аккаунт Google:')]");
+
+        private static By _currentAliasLocator = By.XPath("//div[@class='gb_lb gb_mb']");
+
 
         public static void InitBrowser()
         {
@@ -27,7 +33,6 @@ namespace GoogleMail.Helpers
         {
             LoginPage lp = new LoginPage(_driver);
             lp.
-                //OpenPage().
                 EnterUsername(username).
                 ConfirmUsername().
                 EnterPassword(password);
@@ -52,6 +57,7 @@ namespace GoogleMail.Helpers
             return lp.IsIncorrectUsernameMessageShown();
         }
 
+
         public static bool IsEmptyUsernameMessageShown()
         {
             LoginPage lp = new LoginPage(_driver);
@@ -64,6 +70,7 @@ namespace GoogleMail.Helpers
             LoginPage lp = new LoginPage(_driver);
             return lp.IsIncorrectPasswordMessageShown();
         }
+
 
         public static bool IsEmptyPasswordMessageShown()
         {
@@ -101,15 +108,33 @@ namespace GoogleMail.Helpers
             InboxPage ip = new InboxPage(_driver);
             ip.OpenMessage();
             var alias = ip.GetMessageContent().Split(' ');
+            _driver.Navigate().Back();
             return alias;
         }
 
 
-        //public static AccountPage ReplaceAlias(string[] alias)
-        //{
-        //    InboxPage ip = new InboxPage(_driver);
-        //    ip.OpenAvailableAccountsTab();
-        //    ip.OpenAccountSettings();
-        //}
+        public static AccountPage ReplaceAlias(string[] alias)
+        {
+            InboxPage ip = new InboxPage(_driver);
+            ip.OpenAvailableAccountsTab();
+            AccountPage ap = ip.OpenAccountSettings();
+            ap.OpenPersonalInformationTab().
+                OpenChangeNameTab().
+                ChangeName(alias[0]).
+                ChangeSurname(alias[1]);
+            return ap.ConfirmChanges();
+        }
+
+
+        public static string GetCurrentAlias()
+        {
+            _driver.Navigate().Refresh();
+            new WebDriverWait(_driver, System.TimeSpan.FromSeconds(15)).Until(
+                ExpectedConditions.ElementIsVisible(_availableAccountsTabLocator));
+            _driver.FindElement(_availableAccountsTabLocator).Click();
+            string alias = _driver.FindElement(_currentAliasLocator).Text;
+            _driver.FindElement(_availableAccountsTabLocator).Click();
+            return alias;
+        }
     }
 }
