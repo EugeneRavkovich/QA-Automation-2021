@@ -67,6 +67,7 @@ namespace GoogleMail.Pages
             return incorrectUsernameMessage != null;
         }
 
+
         public bool IsEmptyUsernameMessageShown()
         {
             Wait.Until(ExpectedConditions.ElementExists(_emptyUsernameMessageLocator));
@@ -81,6 +82,7 @@ namespace GoogleMail.Pages
             var incorrectPasswordMessage = Driver.FindElement(_incorrectPasswordMessageLocator);
             return incorrectPasswordMessage != null;
         }
+
 
         public bool IsEmptyPasswordMessageShown()
         {
