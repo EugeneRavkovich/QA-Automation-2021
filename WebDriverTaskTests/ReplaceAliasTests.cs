@@ -43,7 +43,6 @@ namespace WebDriverTaskTests
             if (GmailHelper.IsMessageCame(MailRuAlias))
             {
                 GmailHelper.ReplaceAlias(GmailHelper.GetAliasFromMessage());
-                System.Threading.Thread.Sleep(10000);
             }
         }
 
@@ -59,9 +58,8 @@ namespace WebDriverTaskTests
         [TestMethod]
         public void ReplaceAlias()
         {
-            var newAlias = GmailHelper.GetCurrentAlias();
-            var isReplaced = newAlias == ReplyMessage && newAlias != BaseAlias;
-            Assert.IsTrue(isReplaced);
+            bool isUpdated = GmailHelper.IsAliasUpdated(BaseAlias);
+            Assert.IsTrue(isUpdated);
         }
     }
 }
