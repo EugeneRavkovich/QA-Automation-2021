@@ -1,10 +1,12 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 
 namespace MailRu.Pages
 {
-    class LoginPage: BasePage
+    /// <summary>
+    /// A class that defines the login page entity
+    /// </summary>
+    class LoginPage : BasePage
     {
         private readonly By _usernameFieldLocator = By.XPath("//input[@name='username']");
 
@@ -16,17 +18,22 @@ namespace MailRu.Pages
 
         private const string _baseUrl = "https://account.mail.ru/login";
 
+
+        /// <summary>
+        /// Constructor for initializing the class fields
+        /// </summary>
+        /// <param name="driver">The current state of the Selenium driver</param>
         public LoginPage(IWebDriver driver) : base(driver)
         {
             Wait.Until(ExpectedConditions.TitleContains(_driverTitle));
         }
 
-        public LoginPage OpenPage()
-        {
-            Driver.Navigate().GoToUrl(_baseUrl);
-            return this;
-        }
 
+        /// <summary>
+        /// Method for entering the username for logging
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>Current page</returns>
         public LoginPage EnterUsername(string username)
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_usernameFieldLocator));
@@ -34,6 +41,11 @@ namespace MailRu.Pages
             return this;
         }
 
+
+        /// <summary>
+        /// Method for confirming the entered username
+        /// </summary>
+        /// <returns>Current page</returns>
         public LoginPage ConfirmUsername()
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_confirmButtonLocator));
@@ -42,6 +54,11 @@ namespace MailRu.Pages
         }
 
 
+        /// <summary>
+        /// Method for entering the password for logging
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns>Current page</returns>
         public LoginPage EnterPassword(string password)
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_passwordFieldLocator));
@@ -49,6 +66,11 @@ namespace MailRu.Pages
             return this;
         }
 
+
+        /// <summary>
+        /// Method for confirming the entered password
+        /// </summary>
+        /// <returns>The page to which it transfers after pressing the confirm button</returns>
         public InboxPage ConfirmPassword()
         {
             Driver.FindElement(_confirmButtonLocator).Click();

@@ -1,10 +1,12 @@
 ﻿using OpenQA.Selenium;
 using GoogleMail.DriverInstance;
 using GoogleMail.Pages;
-using OpenQA.Selenium.Support.UI;
 
 namespace GoogleMail.Helpers
 {
+    /// <summary>
+    /// A class that contains auxiliary methods based on Gmail pages
+    /// </summary>
     public class GmailHelper
     {
         private static IWebDriver _driver;
@@ -16,6 +18,9 @@ namespace GoogleMail.Helpers
         private static By _currentAliasLocator = By.XPath("//div[@class='gb_lb gb_mb']");
 
 
+        /// <summary>
+        /// Inits the browser
+        /// </summary>
         public static void InitBrowser()
         {
             _driver = Driver.GetInstance();
@@ -23,12 +28,21 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Closes the browser
+        /// </summary>
         public static void CloseBrowser()
         {
             Driver.CloseBrowser();
         }
 
 
+        /// <summary>
+        /// Method for logging into the account
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>The page to which it transfers after the login</returns>
         public static BasePage DoLogin(string username, string password)
         {
             LoginPage lp = new LoginPage(_driver);
@@ -40,6 +54,12 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for sending a message to the specified user 
+        /// </summary>
+        /// <param name="recipient">Recipient email</param>
+        /// <param name="message">Message content</param>
+        /// <returns>Current page (Inbox page)</returns>
         public static InboxPage SendMessage(string recipient, string message)
         {
             InboxPage ip = new InboxPage(_driver);
@@ -51,6 +71,10 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an incorrect entered username
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public static bool IsIncorrectUsernameMessageShown()
         {
             LoginPage lp = new LoginPage(_driver);
@@ -58,6 +82,10 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an empty entered username
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public static bool IsEmptyUsernameMessageShown()
         {
             LoginPage lp = new LoginPage(_driver);
@@ -65,6 +93,10 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an incorrect entered password
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public static bool IsIncorrectPasswordMessageShown()
         {
             LoginPage lp = new LoginPage(_driver);
@@ -72,6 +104,10 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an empty entered password
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public static bool IsEmptyPasswordMessageShown()
         {
             LoginPage lp = new LoginPage(_driver);
@@ -79,6 +115,11 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that checks whether the message has not been read and has the correct addressee
+        /// </summary>
+        /// <param name="addressee">The addressee username</param>
+        /// <returns>True if message hasn't been read and has the correct addressee, otherwise false</returns>
         public static bool IsCorrectMessage(string addressee)
         {
             InboxPage ip = new InboxPage(_driver);
@@ -86,6 +127,11 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for waiting for a valid message
+        /// </summary>
+        /// <param name="addressee">The addressee username</param>
+        /// <returns>True if such message has came, else false</returns>
         public static bool IsMessageCame(string addressee)
         {
             int waitingTime = 0;
@@ -103,6 +149,10 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for geting the first to words from the last incomming message
+        /// </summary>
+        /// <returns>String[] with words</returns>
         public static string[] GetAliasFromMessage()
         {
             InboxPage ip = new InboxPage(_driver);
@@ -113,6 +163,11 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for replacing the old alias with a new one
+        /// </summary>
+        /// <param name="alias">New alias for replacing</param>
+        /// <returns>Current page (Account page)</returns>
         public static AccountPage ReplaceAlias(string[] alias)
         {
             InboxPage ip = new InboxPage(_driver);
@@ -126,6 +181,10 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for getting the current alias from any of gmail pages
+        /// </summary>
+        /// <returns>The current alias</returns>
         public static string GetCurrentAlias()
         {
             //_driver.Navigate().Refresh();
@@ -138,6 +197,11 @@ namespace GoogleMail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for checking whether an alias has been updated
+        /// </summary>
+        /// <param name="baseAlias">Base alias before updating</param>
+        /// <returns>True if updated, else false</returns>
         public static bool IsAliasUpdated(string baseAlias)
         {
             int waitingTime = 0;

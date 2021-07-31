@@ -3,6 +3,9 @@ using OpenQA.Selenium.Support.UI;
 
 namespace GoogleMail.Pages
 {
+    /// <summary>
+    /// A class that defines the account settings page entity
+    /// </summary>
     public class AccountPage: BasePage
     {
         private readonly By _personalInformationLocator = By.XPath("(//a[@href='personal-info?gar=1'])[2]");
@@ -18,6 +21,10 @@ namespace GoogleMail.Pages
         private readonly string _driverTitle = "Аккаунт Google";
 
 
+        /// <summary>
+        /// Constructor for initializing the class fields
+        /// </summary>
+        /// <param name="driver">The current state of the Selenium driver</param>
         public AccountPage(IWebDriver driver) : base(driver)
         {
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
@@ -25,6 +32,11 @@ namespace GoogleMail.Pages
         }
 
 
+        /// <summary>
+        /// Method for opening the personal information tab
+        /// by pressing the "personal information" button
+        /// </summary>
+        /// <returns>Current page</returns>
         public AccountPage OpenPersonalInformationTab()
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_personalInformationLocator));
@@ -33,6 +45,10 @@ namespace GoogleMail.Pages
         }
 
 
+        /// <summary>
+        /// Method for opening the tab for changing the alias of the account owner
+        /// </summary>
+        /// <returns>Current page</returns>
         public AccountPage OpenChangeNameTab()
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_nameFieldLocator));
@@ -41,6 +57,11 @@ namespace GoogleMail.Pages
         }
 
 
+        /// <summary>
+        /// Method for changing the name of the account owner 
+        /// </summary>
+        /// <param name="name">A new name for replacing</param>
+        /// <returns>Current page</returns>
         public AccountPage ChangeName(string name)
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_nameLocator));
@@ -50,6 +71,11 @@ namespace GoogleMail.Pages
         }
 
 
+        /// <summary>
+        /// Method for changing the surname of the account owner
+        /// </summary>
+        /// <param name="surname">A new surname for replacing</param>
+        /// <returns>Current page</returns>
         public AccountPage ChangeSurname(string surname)
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_surnameLocator));
@@ -59,6 +85,10 @@ namespace GoogleMail.Pages
         }
 
 
+        /// <summary>
+        /// Method for confirming changes by pressing the confirmation button
+        /// </summary>
+        /// <returns></returns>
         public AccountPage ConfirmChanges()
         {
             Wait.Until(ExpectedConditions.ElementIsVisible(_confirmButtonLocator));
