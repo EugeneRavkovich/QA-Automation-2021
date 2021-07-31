@@ -128,13 +128,30 @@ namespace GoogleMail.Helpers
 
         public static string GetCurrentAlias()
         {
-            _driver.Navigate().Refresh();
-            new WebDriverWait(_driver, System.TimeSpan.FromSeconds(15)).Until(
-                ExpectedConditions.ElementIsVisible(_availableAccountsTabLocator));
+            //_driver.Navigate().Refresh();
+            //new WebDriverWait(_driver, System.TimeSpan.FromSeconds(15)).Until(
+            //    ExpectedConditions.ElementIsVisible(_availableAccountsTabLocator));
             _driver.FindElement(_availableAccountsTabLocator).Click();
             string alias = _driver.FindElement(_currentAliasLocator).Text;
             _driver.FindElement(_availableAccountsTabLocator).Click();
             return alias;
+        }
+
+
+        public static bool IsAliasUpdated(string baseAlias)
+        {
+            int waitingTime = 0;
+            while (GetCurrentAlias() == baseAlias)
+            {
+                System.Threading.Thread.Sleep(5000);
+                waitingTime += 5000;
+                if (waitingTime >= 60000)
+                {
+                    return false;
+                }
+                _driver.Navigate().Refresh();
+            }
+            return true;
         }
     }
 }
