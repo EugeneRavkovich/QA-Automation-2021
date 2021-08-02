@@ -37,59 +37,59 @@ namespace WebDriverTaskTests
         }
 
 
+        //[TestMethod]
+        //[DataRow(IncorrectUsername, CorrectPassword)]
+        //[DataRow("", CorrectPassword)]
+        //[DataRow(CorrectUsername, IncorrectPassword)]
+        //[DataRow(CorrectUsername, "")]
+        //public void Login_IncorrectCredentials(string username, string password)
+        //{
+        //    Assert.ThrowsException<OpenQA.Selenium.WebDriverTimeoutException>(
+        //        () => GmailHelper.DoLogin(username, password));
+        //}
+
+
         [TestMethod]
-        [DataRow(IncorrectUsername, CorrectPassword)]
-        [DataRow("", CorrectPassword)]
-        [DataRow(CorrectUsername, IncorrectPassword)]
-        [DataRow(CorrectUsername, "")]
-        public void Login_IncorrectUsername(string username, string password)
+        public void Login_WrongUsername()
         {
-            Assert.ThrowsException<OpenQA.Selenium.WebDriverTimeoutException>(
-                () => GmailHelper.DoLogin(username, password));
+            Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsIncorrectUsernameMessageShown());
+            Task tryLogin = new Task(() => GmailHelper.DoLogin(IncorrectUsername, CorrectPassword));
+            tryLogin.Start();
+            tryFindError.Start();
+            Assert.IsTrue(tryFindError.Result);
         }
 
 
-        //[TestMethod]
-        //public void Login_WrongUsername()
-        //{
-        //    Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsIncorrectUsernameMessageShown());
-        //    Task tryLogin = new Task(() => GmailHelper.DoLogin(IncorrectUsername, CorrectPassword));
-        //    tryLogin.Start();
-        //    tryFindError.Start();
-        //    Assert.IsTrue(tryFindError.Result);
-        //}
+        [TestMethod]
+        public void Login_EmptyUsername()
+        {
+            Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsEmptyUsernameMessageShown());
+            Task tryLogin = new Task(() => GmailHelper.DoLogin(string.Empty, CorrectPassword));
+            tryLogin.Start();
+            tryFindError.Start();
+            Assert.IsTrue(tryFindError.Result);
+        }
 
 
-        //[TestMethod]
-        //public void Login_EmptyUsername()
-        //{
-        //    Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsEmptyUsernameMessageShown());
-        //    Task tryLogin = new Task(() => GmailHelper.DoLogin(string.Empty, CorrectPassword));
-        //    tryLogin.Start();
-        //    tryFindError.Start();
-        //    Assert.IsTrue(tryFindError.Result);
-        //}
+        [TestMethod]
+        public void Login_CorrectUsernameWrongPassword()
+        {
+            Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsIncorrectPasswordMessageShown());
+            Task tryLogin = new Task(() => GmailHelper.DoLogin(CorrectUsername, IncorrectPassword));
+            tryLogin.Start();
+            tryFindError.Start();
+            Assert.IsTrue(tryFindError.Result);
+        }
 
 
-        //[TestMethod]
-        //public void Login_CorrectUsernameWrongPassword()
-        //{
-        //    Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsIncorrectPasswordMessageShown());
-        //    Task tryLogin = new Task(() => GmailHelper.DoLogin(CorrectUsername, IncorrectPassword));
-        //    tryLogin.Start();
-        //    tryFindError.Start();
-        //    Assert.IsTrue(tryFindError.Result);
-        //}
-
-
-        //[TestMethod]
-        //public void Login_CorrectUsenameEmptyPassword()
-        //{
-        //    Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsEmptyPasswordMessageShown());
-        //    Task tryLogin = new Task(() => GmailHelper.DoLogin(CorrectUsername, string.Empty));
-        //    tryLogin.Start();
-        //    tryFindError.Start();
-        //    Assert.IsTrue(tryFindError.Result);
-        //}
+        [TestMethod]
+        public void Login_CorrectUsenameEmptyPassword()
+        {
+            Task<bool> tryFindError = new Task<bool>(() => GmailHelper.IsEmptyPasswordMessageShown());
+            Task tryLogin = new Task(() => GmailHelper.DoLogin(CorrectUsername, string.Empty));
+            tryLogin.Start();
+            tryFindError.Start();
+            Assert.IsTrue(tryFindError.Result);
+        }
     }
 }
