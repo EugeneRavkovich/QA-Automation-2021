@@ -1,9 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace MailFramework.MailServices.Gmail.Pages
+namespace MailFramework.Models
 {
-    public abstract class BasePage
+    public class BasePage
     {
         private readonly int _waitTime = 15;
 
