@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace MailFramework.Models
 {
-    public class BasePage
+    public abstract class BasePage
     {
         private readonly int _waitTime = 15;
 
