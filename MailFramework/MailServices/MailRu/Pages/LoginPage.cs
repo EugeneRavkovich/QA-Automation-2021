@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using MailFramework.Models;
 using NLog;
 
 namespace MailFramework.MailServices.MailRu.Pages
