@@ -20,6 +20,9 @@ namespace MailFramework.Models
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
 
+        private MailServiceBrowser() { }
+
+
         public static IWebDriver GetInstance(string mailServiceBrowser)
         {
             if (!drivers.TryGetValue(mailServiceBrowser, out var tmp))
