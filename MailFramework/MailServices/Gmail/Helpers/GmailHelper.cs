@@ -6,6 +6,9 @@ using NLog;
 
 namespace MailFramework.MailServices.Gmail.Helpers
 {
+    /// <summary>
+    /// A class that contains auxiliary methods based on Gmail pages
+    /// </summary>
     public class GmailHelper
     {
         private IWebDriver _driver;
@@ -19,6 +22,9 @@ namespace MailFramework.MailServices.Gmail.Helpers
         private readonly By _currentAliasLocator = By.XPath("//div[@class='gb_lb gb_mb']");
 
 
+        /// <summary>
+        /// Inits the browser
+        /// </summary>
         public void InitBrowser()
         {
             _driver = MailServiceBrowser.GetInstance("GmailBrowser");
@@ -26,12 +32,20 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Closes the browser
+        /// </summary>
         public void CloseBrowser()
         {
             MailServiceBrowser.CloseBrowser("GmailBrowser");
         }
 
 
+        /// <summary>
+        /// Method for logging into the account
+        /// </summary>
+        /// <param name="user">User to login</param>
+        /// <returns>The page to which it transfers after login</returns>
         public BasePage DoLogin(User user)
         {
             LoginPage loginPage = new LoginPage(_driver);
@@ -43,6 +57,10 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an incorrect entered username
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsIncorrectUsernameMessageShown()
         {
             LoginPage loginPage = new LoginPage(_driver);
@@ -55,6 +73,10 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an empty entered username
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsEmptyUsernameMessageShown()
         {
             LoginPage loginPage = new LoginPage(_driver);
@@ -67,6 +89,10 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an incorrect entered password
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsIncorrectPasswordMessageShown()
         {
             LoginPage loginPage = new LoginPage(_driver);
@@ -79,6 +105,10 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an empty entered password
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsEmptyPasswordMessageShown()
         {
             LoginPage loginPage = new LoginPage(_driver);
@@ -91,6 +121,12 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for sending a message to the specified user
+        /// </summary>
+        /// <param name="recipient">Recipient user</param>
+        /// <param name="content">Message content</param>
+        /// <returns>The current page (Inbox page)</returns>
         public InboxPage SendMessage(User recipient, string content)
         {
             InboxPage inboxPage = new InboxPage(_driver);
@@ -102,6 +138,11 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for waiting for a valid message
+        /// </summary>
+        /// <param name="addressee">The user from whom the message is expected</param>
+        /// <returns>True if such message has came, else false</returns>
         public bool IsMessageCame(User addressee)
         {
             int waitingTime = 0;
@@ -119,6 +160,11 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method that checks whether the message has not been read and has the correct addressee
+        /// </summary>
+        /// <param name="addressee">Addressee user</param>
+        /// <returns>True if message hasn't been read and has the correct addressee, otherwise false</returns>
         private bool IsCorrectMessage(User addressee)
         {
             InboxPage inboxPage = new InboxPage(_driver);
@@ -127,6 +173,10 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for getting the first two words from the last incomming message as alias
+        /// </summary>
+        /// <returns>Alias object</returns>
         public Alias GetAliasFromMessage()
         {
             InboxPage inboxPage = new InboxPage(_driver);
@@ -137,6 +187,11 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for replacing the old alias with a new one
+        /// </summary>
+        /// <param name="alias">New alias for replacing</param>
+        /// <returns>The current page (ChangeNameTab)</returns>
         public ChangeNameTab ReplaceAlias(Alias alias)
         {
             InboxPage inboxPage = new InboxPage(_driver);
@@ -151,6 +206,11 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
          
+        /// <summary>
+        /// Method for replacing the new alias with old one
+        /// </summary>
+        /// <param name="baseAlias">Old alias for replacing</param>
+        /// <returns>The current page (ChangeNameTab)</returns>
         public ChangeNameTab ReplaceAliasBack(Alias baseAlias)
         {
             ChangeNameTab changeNameTab = new ChangeNameTab(_driver);
@@ -161,6 +221,10 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for getting the current alias from any of gmail pages
+        /// </summary>
+        /// <returns>The current alias</returns>
         public Alias GetCurrentAlias()
         {
             _driver.FindElement(_availableAccountsTabLocator).Click();
@@ -172,6 +236,11 @@ namespace MailFramework.MailServices.Gmail.Helpers
         }
 
 
+        /// <summary>
+        /// Method for checking whether an alias has been updated
+        /// </summary>
+        /// <param name="baseAlias">Alias before updating</param>
+        /// <returns>True if updated, else false</returns>
         public bool IsAliasUpdated(Alias baseAlias)
         {
             int waitingTime = 0;
