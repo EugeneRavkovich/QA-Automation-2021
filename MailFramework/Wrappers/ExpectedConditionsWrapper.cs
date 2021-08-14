@@ -7,7 +7,7 @@ namespace MailFramework.Wrappers
     {
         public static Func<IWebDriver, IWebElement> ElementIsVisible(By locator)
         {
-            return driver => 
+            return driver =>
             {
                 try
                 {
@@ -18,6 +18,28 @@ namespace MailFramework.Wrappers
                 {
                     return null;
                 }
+                catch (NoSuchElementException)
+                {
+                    return null;
+                }
+            };
+        }
+
+
+        public static Func<IWebDriver, bool> TitleContains(string partOfTitle)
+        {
+            return driver =>
+            {
+                return driver.Title.Contains(partOfTitle);
+            };
+        }
+
+
+        public static Func<IWebDriver, bool> TitleIs(string title)
+        {
+            return driver =>
+            {
+                return driver.Title == title;
             };
         }
     }
