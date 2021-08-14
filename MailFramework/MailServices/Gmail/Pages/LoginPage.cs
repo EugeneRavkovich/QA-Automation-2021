@@ -1,25 +1,39 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using MailFramework.Models;
 using NLog;
+using MailFramework.Wrappers;
 
 namespace MailFramework.MailServices.Gmail.Pages
 {
     public class LoginPage: BasePage
     {
-        private readonly By _usernameFieldLocator = By.XPath("//input[@type='email']");
+        private IWebElement UsernameField =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//input[@type='email']")));
 
-        private readonly By _confirmButtonLocator = By.XPath("//span[text()='Далее']");
+        private IWebElement ConfirmButton =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//span[text()='Далее']")));
 
-        private readonly By _passwordFieldLocator = By.XPath("//input[@type='password']");
+        private IWebElement PasswordField =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//input[@type='password']")));
 
-        private readonly By _incorrectUsernameMessageLocator = By.XPath("//div[text()[contains(., 'Не удалось')]]");
+        private IWebElement IncorrectUsernameMessage =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[text()[contains(., 'Не удалось')]]")));
 
-        private readonly By _emptyUsernameMessageLocator = By.XPath("//div[text()[contains(., 'Введите адрес')]]");
+        private IWebElement EmptyUsernameMessage =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[text()[contains(., 'Введите адрес')]]")));
 
-        private readonly By _incorrectPasswordMessageLocator = By.XPath("//span[contains(text(), 'Неверный')]");
+        private IWebElement IncorrectPasswordMessage =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//span[contains(text(), 'Неверный')]")));
 
-        private readonly By _emptyPasswordMessageLocator = By.XPath("//span[text()[contains(., 'Введите пароль')]]");
+        private IWebElement EmptyPasswordMessage =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//span[text()[contains(., 'Введите пароль')]]")));
 
         private readonly string _driverTitle = "Gmail";
 
@@ -28,72 +42,60 @@ namespace MailFramework.MailServices.Gmail.Pages
 
         public LoginPage(IWebDriver driver) : base(driver)
         {
-            Wait.Until(ExpectedConditions.TitleContains(_driverTitle));
+            Wait.Until(ExpectedConditionsWrapper.TitleContains(_driverTitle));
             _logger.Info("The login page is loaded");
         }
 
 
         public LoginPage EnterUsername(string username)
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_usernameFieldLocator));
-            Driver.FindElement(_usernameFieldLocator).SendKeys(username);
+            UsernameField.SendKeys(username);
             return this;
         }
 
 
         public LoginPage ConfirmUsername()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_confirmButtonLocator));
-            Driver.FindElement(_confirmButtonLocator).Click();
+            ConfirmButton.Click();
             return this;
         }
 
 
         public LoginPage EnterPassword(string password)
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_passwordFieldLocator));
-            Driver.FindElement(_passwordFieldLocator).SendKeys(password);
+            PasswordField.SendKeys(password);
             return this;
         }
 
 
         public InboxPage ConfirmPassword()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_confirmButtonLocator));
-            Driver.FindElement(_confirmButtonLocator).Click();
+            ConfirmButton.Click();
             return new InboxPage(Driver);
         }
 
 
         public bool IsIncorrectUsernameMessageShown()
         {
-            Wait.Until(ExpectedConditions.ElementExists(_incorrectUsernameMessageLocator));
-            var incorrectUsernameMessage = Driver.FindElement(_incorrectUsernameMessageLocator);
-            return incorrectUsernameMessage != null;
+            return IncorrectUsernameMessage != null;
         }
 
 
         public bool IsEmptyUsernameMessageShown()
         {
-            Wait.Until(ExpectedConditions.ElementExists(_emptyUsernameMessageLocator));
-            var emptyUsernameMessage = Driver.FindElement(_emptyUsernameMessageLocator);
-            return emptyUsernameMessage != null;
+            return EmptyUsernameMessage != null;
         }
 
 
         public bool IsIncorrectPasswordMessageShown()
         {
-            Wait.Until(ExpectedConditions.ElementExists(_incorrectPasswordMessageLocator));
-            var incorrectPasswordMessage = Driver.FindElement(_incorrectPasswordMessageLocator);
-            return incorrectPasswordMessage != null;
+            return IncorrectPasswordMessage != null;
         }
 
 
         public bool IsEmptyPasswordMessageShown()
         {
-            Wait.Until(ExpectedConditions.ElementExists(_emptyPasswordMessageLocator));
-            var emptyPasswordMessage = Driver.FindElement(_emptyPasswordMessageLocator);
-            return emptyPasswordMessage != null;
+            return EmptyPasswordMessage != null;
         }
     }
 }

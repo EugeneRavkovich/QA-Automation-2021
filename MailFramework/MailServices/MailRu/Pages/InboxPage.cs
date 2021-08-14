@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using MailFramework.Models;
+using MailFramework.Wrappers;
 using NLog;
 
 namespace MailFramework.MailServices.MailRu.Pages
@@ -9,17 +9,30 @@ namespace MailFramework.MailServices.MailRu.Pages
     {
         private const string _lastMessageXPath = "//a[contains(@class, 'letter-list-item')][1]";
 
-        private readonly By _lastIncommingMessageLocator = By.XPath(_lastMessageXPath);
+        private IWebElement LastIncommingMessage =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath(_lastMessageXPath)));
 
-        private readonly By _messageAddresseeLocator = By.XPath(_lastMessageXPath + "/descendant::span[contains(@title, '@')]");
+        private IWebElement MessageAddressee =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath(_lastMessageXPath + "/descendant::span[contains(@title, '@')]")));
 
-        private readonly By _messageContent = By.XPath("//div[@class='letter-body']/descendant::div[contains(text(), .)]");
+        private IWebElement MessageContent =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[@class='letter-body']/descendant::div[contains(text(), .)]")));
 
-        private readonly By _replyButtonLocator = By.XPath("//span[contains(@title, 'Ответить')]");
 
-        private readonly By _inputMessageFieldLocator = By.XPath("//div[@role='textbox']//div[1]");
+        private IWebElement ReplyButton =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//span[contains(@title, 'Ответить')]")));
 
-        private readonly By _sendReplyButtonLocator = By.XPath("//span[text()='Отправить']");
+        private IWebElement InputMessageField =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[@role='textbox']//div[1]")));
+
+        private IWebElement SendReplyButton =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//span[text()='Отправить']")));
 
         private readonly string _driverTitle = "Входящие";
 
@@ -30,23 +43,20 @@ namespace MailFramework.MailServices.MailRu.Pages
 
         public InboxPage(IWebDriver driver) : base(driver)
         {
-            Wait.Until(ExpectedConditions.TitleContains(_driverTitle));
+            Wait.Until(ExpectedConditionsWrapper.TitleContains(_driverTitle));
             _logger.Info("The inbox page is opened");
         }
 
 
         public bool IsMessageNotRead()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_messageAddresseeLocator));
-            string actualFontWeight = Driver.FindElement(_messageAddresseeLocator).GetCssValue("font-weight");
-            return actualFontWeight == _boldFontWeight;
+            return MessageAddressee.GetCssValue("font-weight") == _boldFontWeight;
         }
 
 
         public bool IsCorrectAddressee(string addressee)
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_messageAddresseeLocator));
-            var messageTitle = Driver.FindElement(_messageAddresseeLocator).GetAttribute("title");
+            var messageTitle = MessageAddressee.GetAttribute("title");
             var messageAddressee = messageTitle.Substring(
                 messageTitle.IndexOf("<") + 1, messageTitle.Length -
                 messageTitle.IndexOf("<") - 2);
@@ -56,38 +66,34 @@ namespace MailFramework.MailServices.MailRu.Pages
 
         public InboxPage OpenLastIncommingMessage()
         {
-            Driver.FindElement(_lastIncommingMessageLocator).Click();
+            LastIncommingMessage.Click();
             return this;
         }
 
 
         public string GetMessageContent()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_messageContent));
-            return Driver.FindElement(_messageContent).Text;
+            return MessageContent.Text;
         }
 
 
         public InboxPage OpenReplyWindow()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_replyButtonLocator));
-            Driver.FindElement(_replyButtonLocator).Click();
+            ReplyButton.Click();
             return this;
         }
 
 
         public InboxPage EnterReplyMessage(string message)
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_inputMessageFieldLocator));
-            Driver.FindElement(_inputMessageFieldLocator).SendKeys(message);
+            InputMessageField.SendKeys(message);
             return this;
         }
 
 
         public InboxPage SendReply()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_sendReplyButtonLocator));
-            Driver.FindElement(_sendReplyButtonLocator).Click();
+            SendReplyButton.Click();
             return this;
         }
     }

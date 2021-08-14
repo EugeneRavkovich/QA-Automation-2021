@@ -133,6 +133,7 @@
     <Compile Include="Utilities\ScreenshotMaker.cs" />
     <Compile Include="Utilities\TestDataReader.cs" />
     <Compile Include="Utilities\UserCreator.cs" />
+    <Compile Include="Wrappers\ExpectedConditionsWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using MailFramework.Models;
+using MailFramework.Wrappers;
 using NLog;
 
 namespace MailFramework.MailServices.Gmail.Pages
@@ -11,23 +11,40 @@ namespace MailFramework.MailServices.Gmail.Pages
 
         private const string _lastMessageXpath = "//table[@role='grid']//tr[1]";
 
-        private readonly By _writeLetterButtonLocator = By.XPath("//div[@class='T-I T-I-KE L3']");
+        private IWebElement WriteLetterButton =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[@class='T-I T-I-KE L3']")));
 
-        private readonly By _recipientFieldLocator = By.XPath("//textarea[@name='to']");
+        private IWebElement RecipientField =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//textarea[@name='to']")));
 
-        private readonly By _messageFieldLocator = By.XPath("//div[@aria-label='Тело письма']");
+        private IWebElement MessageField =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[@aria-label='Тело письма']")));
 
-        private readonly By _sendMessageButtonLocator = By.XPath("//div[text()='Отправить']");
+        private IWebElement SendMessageButton =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[text()='Отправить']")));
 
-        private readonly By _lastIncommingMessageLocator = By.XPath(_lastMessageXpath);
+        private IWebElement LastIncommingMessage =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath(_lastMessageXpath)));
 
-        private readonly By _messageAddresseeLocator = By.XPath(_lastMessageXpath + "//span[@name!='я']");
+        private IWebElement MessageAddressee =>
+            Driver.FindElement(By.XPath(_lastMessageXpath + "//span[@name!='я']"));
 
-        private readonly By _messageContent = By.XPath("//div[@class='a3s aiL ']/div[2]/div[1]");
+        private IWebElement MessageContent =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//div[@class='adM']/following-sibling::div/div[1]")));
 
-        private readonly By _availableAccountsTabLocator = By.XPath("//a[contains(@aria-label, 'Аккаунт Google:')]");
+        private IWebElement AvailableAccountsTab =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//a[contains(@aria-label, 'Аккаунт Google:')]")));
 
-        private readonly By _manageAccountButtonLocator = By.XPath("//a[contains(text(), 'Управление')]");
+        private IWebElement ManageAccountButton =>
+            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
+                By.XPath("//a[contains(text(), 'Управление')]")));
 
         private readonly string _boldFontWeight = "700";
 
@@ -36,86 +53,74 @@ namespace MailFramework.MailServices.Gmail.Pages
 
         public InboxPage(IWebDriver driver) : base(driver)
         {
-            Wait.Until(ExpectedConditions.TitleContains(_driverTitle));
+            Wait.Until(ExpectedConditionsWrapper.TitleContains(_driverTitle));
             _logger.Info("The inbox page is loaded");
         }
 
 
         public InboxPage OpenNewMessageTab()
         {
-            Wait.Until(ExpectedConditions.ElementExists(_writeLetterButtonLocator));
-            Driver.FindElement(_writeLetterButtonLocator).Click();
+            WriteLetterButton.Click();
             return this;
         }
 
 
         public InboxPage EnterRecipient(string recipient)
         {
-            Wait.Until(ExpectedConditions.ElementExists(_recipientFieldLocator));
-            Driver.FindElement(_recipientFieldLocator).SendKeys(recipient);
+            RecipientField.SendKeys(recipient);
             return this;
         }
 
 
         public InboxPage EnterMessage(string message)
         {
-            Wait.Until(ExpectedConditions.ElementExists(_messageFieldLocator));
-            Driver.FindElement(_messageFieldLocator).SendKeys(message);
+            MessageField.SendKeys(message);
             return this;
         }
 
 
         public InboxPage SendMessage()
         {
-            Wait.Until(ExpectedConditions.ElementExists(_sendMessageButtonLocator));
-            Driver.FindElement(_sendMessageButtonLocator).Click();
+            SendMessageButton.Click();
             return this;
         }
 
 
         public bool IsMessageNotRead()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_lastIncommingMessageLocator));
-            string actualFontWeight = Driver.FindElement(_messageAddresseeLocator).GetCssValue("font-weight");
-            return actualFontWeight == _boldFontWeight;
+            return MessageAddressee.GetCssValue("font-weight") == _boldFontWeight;
         }
 
 
         public bool IsCorrectAddressee(string addressee)
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_lastIncommingMessageLocator));
-            var messageAddressee = Driver.FindElement(_messageAddresseeLocator).GetAttribute("email");
-            return messageAddressee == addressee;
+            return MessageAddressee.GetAttribute("email") == addressee;
         }
 
 
         public InboxPage OpenLastIncommingMessage()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_lastIncommingMessageLocator));
-            Driver.FindElement(_lastIncommingMessageLocator).Click();
+            LastIncommingMessage.Click();
             return this;
         }
 
 
         public string GetMessageContent()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_messageContent));
-            return Driver.FindElement(_messageContent).Text;
+            return MessageContent.Text;
         }
 
 
         public InboxPage OpenAvailableAccountsTab()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_availableAccountsTabLocator));
-            Driver.FindElement(_availableAccountsTabLocator).Click();
+            AvailableAccountsTab.Click();
             return this;
         }
 
 
         public AccountPage OpenAccountSettings()
         {
-            Wait.Until(ExpectedConditions.ElementIsVisible(_manageAccountButtonLocator));
-            Driver.FindElement(_manageAccountButtonLocator).Click();
+            ManageAccountButton.Click();
             return new AccountPage(Driver);
         }
     }
