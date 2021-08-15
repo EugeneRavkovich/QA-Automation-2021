@@ -36,7 +36,7 @@ namespace MailFramework.MailServices.Gmail.Pages
 
         private IWebElement MessageContent =>
             Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
-                By.XPath("//div[@class='adM']/following-sibling::div/div[1]")));
+                By.XPath("(//div[@class='a3s aiL ']//div)[3]")));
 
         private IWebElement AvailableAccountsTab =>
             Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
