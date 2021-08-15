@@ -13,7 +13,8 @@ namespace MailTests
 
         protected readonly MailruHelper mailruHelper = new MailruHelper();
 
-        protected readonly User gmailUser = UserCreator.GmailUser();
+        //protected readonly User gmailUser = UserCreator.GmailUser();
+        protected readonly User gmailUser = UserCreator.MailruUser();
 
         protected readonly User mailruUser = UserCreator.MailruUser();
 
