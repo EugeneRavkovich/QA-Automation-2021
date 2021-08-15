@@ -11,17 +11,22 @@ namespace MailFramework.Utilities
 
         public static void MakeScreenshot(IWebDriver driver)
         {
+            DeleteDirectory();
+            CreateDirectory();
             Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
             screenshot.SaveAsFile(CreateFilename(), ScreenshotImageFormat.Jpeg);
         }
 
 
-        private static void CheckDirectory()
+        private static void DeleteDirectory()
         {
-            if (!Directory.Exists(SaveTo))
-            {
-                Directory.CreateDirectory(SaveTo);
-            }
+            Directory.Delete(SaveTo);
+        }
+
+
+        private static void CreateDirectory()
+        {
+            Directory.CreateDirectory(SaveTo);
         }
 
 
@@ -29,7 +34,6 @@ namespace MailFramework.Utilities
         {
             string longdate = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             string testName = TestContext.CurrentContext.Test.FullName;
-            CheckDirectory();
             return SaveTo + testName + longdate + ".jpg";
         }
     }
