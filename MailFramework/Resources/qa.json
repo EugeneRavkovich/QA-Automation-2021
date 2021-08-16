@@ -1,0 +1,6 @@
+{
+  "testdata.gmail.user.name": "test.qa.acc.gm@gmail.com",
+  "testdata.gmail.user.password": "test.qa.password.gm",
+  "testdata.mailru.user.name": "test.qa.acc.mr@mail.ru",
+  "testdata.mailru.user.password": "test.qa.password.mr"
+}
