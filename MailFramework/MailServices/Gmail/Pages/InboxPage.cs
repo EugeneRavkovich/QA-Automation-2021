@@ -5,6 +5,9 @@ using NLog;
 
 namespace MailFramework.MailServices.Gmail.Pages
 {
+    /// <summary>
+    /// A class that defines the inbox page entity
+    /// </summary>
     public class InboxPage: BasePage
     {
         private readonly string _driverTitle = "Входящие";
@@ -34,10 +37,6 @@ namespace MailFramework.MailServices.Gmail.Pages
         private IWebElement MessageAddressee =>
             Driver.FindElement(By.XPath(_lastMessageXpath + "//span[@name!='я']"));
 
-        private IWebElement MessageContent =>
-            Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
-                By.XPath("(//div[@class='a3s aiL ']//div)[3]")));
-
         private IWebElement AvailableAccountsTab =>
             Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
                 By.XPath("//a[contains(@aria-label, 'Аккаунт Google:')]")));
@@ -51,6 +50,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
 
+        /// <summary>
+        /// Constructor for initializing the class fields
+        /// </summary>
+        /// <param name="driver">The current state of the Selenium driver</param>
         public InboxPage(IWebDriver driver) : base(driver)
         {
             Wait.Until(ExpectedConditionsWrapper.TitleContains(_driverTitle));
@@ -58,6 +61,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for opening a new message tab
+        /// </summary>
+        /// <returns>Current page</returns>
         public InboxPage OpenNewMessageTab()
         {
             WriteLetterButton.Click();
@@ -65,6 +72,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for entering a message recipient
+        /// </summary>
+        /// <param name="recipient">The recipient email</param>
+        /// <returns>Current page</returns>
         public InboxPage EnterRecipient(string recipient)
         {
             RecipientField.SendKeys(recipient);
@@ -72,6 +84,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for entering a message into message field
+        /// </summary>
+        /// <param name="message">Message content</param>
+        /// <returns>Current page</returns>
         public InboxPage EnterMessage(string message)
         {
             MessageField.SendKeys(message);
@@ -79,6 +96,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for sending a message by pressing the confirmation button
+        /// </summary>
+        /// <returns>Current page</returns>
         public InboxPage SendMessage()
         {
             SendMessageButton.Click();
@@ -86,36 +107,42 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method that checks whether the last incomming message has been read
+        /// </summary>
+        /// <returns>Message read or not</returns>
         public bool IsMessageNotRead()
         {
             return MessageAddressee.GetCssValue("font-weight") == _boldFontWeight;
         }
 
 
+        /// <summary>
+        /// Method that vefifies that the email came from the correct addressee
+        /// </summary>
+        /// <param name="addressee">Addressee alias</param>
+        /// <returns>Is correct addressee or not</returns>
         public bool IsCorrectAddressee(string addressee)
         {
             return MessageAddressee.GetAttribute("email") == addressee;
         }
 
 
+        /// <summary>
+        /// Method for opening the last incomming message
+        /// </summary>
+        /// <returns>Current page</returns>
         public MessageTab OpenLastIncommingMessage()
         {
             LastIncommingMessage.Click();
             return new MessageTab(Driver);
         }
 
-        public void foo()
-        {
-            System.Console.WriteLine(Driver.Title);
-        }
 
-        //public string GetMessageContent()
-        //{
-        //    Driver.Navigate().Refresh();
-        //    return MessageContent.Text;
-        //}
-
-
+        /// <summary>
+        /// Method for opening the tab with all available accounts
+        /// </summary>
+        /// <returns>Current page</returns>
         public InboxPage OpenAvailableAccountsTab()
         {
             AvailableAccountsTab.Click();
@@ -123,6 +150,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for openning the account settings tab
+        /// by pressing the account settings button 
+        /// </summary>
+        /// <returns>The page to which it transfers after pressing the manage account button</returns>
         public AccountPage OpenAccountSettings()
         {
             ManageAccountButton.Click();

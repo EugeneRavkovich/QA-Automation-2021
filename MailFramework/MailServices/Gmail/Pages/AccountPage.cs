@@ -5,6 +5,9 @@ using NLog;
 
 namespace MailFramework.MailServices.Gmail.Pages
 {
+    /// <summary>
+    /// A class that defines the account settings page entity
+    /// </summary>
     public class AccountPage: BasePage
     {
         private IWebElement PersonalInformationTab =>
@@ -21,6 +24,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
 
+        /// <summary>
+        /// Constructor for initializing the class fields
+        /// </summary>
+        /// <param name="driver">The current state of the Selenium driver</param>
         public AccountPage(IWebDriver driver) : base(driver)
         {
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
@@ -29,6 +36,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for opening the personal information tab
+        /// by pressing the "personal information" button
+        /// </summary>
+        /// <returns>Current page</returns>
         public AccountPage OpenPersonalInformationTab()
         {
             PersonalInformationTab.Click();
@@ -36,6 +48,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for opening the tab for changing the alias of the account owner
+        /// </summary>
+        /// <returns>Current page</returns>
         public ChangeNameTab OpenChangeNameTab()
         {
             NameField.Click();

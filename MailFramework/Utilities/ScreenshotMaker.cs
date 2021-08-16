@@ -5,10 +5,18 @@ using NUnit.Framework;
 
 namespace MailFramework.Utilities
 {
+    /// <summary>
+    /// Class for making a screenshots
+    /// </summary>
     public class ScreenshotMaker
     {
         private const string SaveTo = ".//Screenshots/";
 
+
+        /// <summary>
+        /// Method for making a screenshots
+        /// </summary>
+        /// <param name="driver">The current state of the Selenium WebDriver object</param>
         public static void MakeScreenshot(IWebDriver driver)
         {
             Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
@@ -16,6 +24,9 @@ namespace MailFramework.Utilities
         }
 
 
+        /// <summary>
+        /// Method for checking if directory already exists
+        /// </summary>
         private static void CheckDirectory()
         {
             if (!Directory.Exists(SaveTo))
@@ -25,6 +36,10 @@ namespace MailFramework.Utilities
         }
 
 
+        /// <summary>
+        /// Method for creating a filename for picture
+        /// </summary>
+        /// <returns>New unique name</returns>
         private static string CreateFilename()
         {
             string longdate = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");

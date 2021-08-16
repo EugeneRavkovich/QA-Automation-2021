@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace MailFramework.Utilities
 {
+    /// <summary>
+    /// Class for reading data from resorce files
+    /// </summary>
     public class TestDataReader
     {
         private static readonly string _filePath = "MailFramework/Resources/";
@@ -13,13 +16,13 @@ namespace MailFramework.Utilities
         private static readonly string _env = TestContext.Parameters["environment"];
         //private static readonly string _env = "qa";
 
+
+        /// <summary>
+        /// Method for getting the value by key from .json file
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static string GetTestData(string key)
-        {
-            return GetData(key);
-        }
-
-
-        private static string GetData(string key)
         {
             var root = JObject.Parse(File.ReadAllText(_filePath + _env + ".json"));
             return root.Descendants().

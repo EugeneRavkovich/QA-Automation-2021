@@ -5,6 +5,9 @@ using NLog;
 
 namespace MailFramework.MailServices.Gmail.Pages
 {
+    /// <summary>
+    /// A class that defines the chagne name tab entity
+    /// </summary>
     public class ChangeNameTab: BasePage
     {
         private IWebElement NameField =>
@@ -24,6 +27,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
 
+        /// <summary>
+        /// Constructor for initializing the class fields
+        /// </summary>
+        /// <param name="driver">The current state of the Selenium driver</param>
         public ChangeNameTab(IWebDriver driver) : base(driver)
         {
             Wait.Until(ExpectedConditionsWrapper.TitleContains(_driverTitle));
@@ -31,6 +38,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for changing the name of the account owner 
+        /// </summary>
+        /// <param name="name">A new name for replacing</param>
+        /// <returns>Current page</returns>
         public ChangeNameTab ChangeName(string name)
         {
             NameField.Clear();
@@ -39,6 +51,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for changing the surname of the account owner
+        /// </summary>
+        /// <param name="surname">A new surname for replacing</param>
+        /// <returns>Current page</returns>
         public ChangeNameTab ChangeSurname(string surname)
         {
             SurnameField.Clear();
@@ -47,6 +64,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for confirming changes by pressing the confirmation button
+        /// </summary>
+        /// <returns>Current page</returns>
         public ChangeNameTab ConfirmChanges()
         {
             ConfirmButton.Click();

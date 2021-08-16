@@ -5,6 +5,9 @@ using MailFramework.Wrappers;
 
 namespace MailFramework.MailServices.Gmail.Pages
 {
+    /// <summary>
+    /// A class that defines the login page entity
+    /// </summary>
     public class LoginPage: BasePage
     {
         private IWebElement UsernameField =>
@@ -40,6 +43,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
 
+        /// <summary>
+        /// Constructor for initializing the class fields
+        /// </summary>
+        /// <param name="driver">The current state of the Selenium driver</param>
         public LoginPage(IWebDriver driver) : base(driver)
         {
             Wait.Until(ExpectedConditionsWrapper.TitleContains(_driverTitle));
@@ -47,6 +54,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for entering the username for logging
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>Current page</returns>
         public LoginPage EnterUsername(string username)
         {
             UsernameField.SendKeys(username);
@@ -54,6 +66,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for confirming the entered username
+        /// </summary>
+        /// <returns>Current page</returns>
         public LoginPage ConfirmUsername()
         {
             ConfirmButton.Click();
@@ -61,6 +77,11 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for entering the password for logging
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns>Current page</returns>
         public LoginPage EnterPassword(string password)
         {
             PasswordField.SendKeys(password);
@@ -68,6 +89,10 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method for confirming the entered password
+        /// </summary>
+        /// <returns>The page to which it transfers after pressing the confirm button</returns>
         public InboxPage ConfirmPassword()
         {
             ConfirmButton.Click();
@@ -75,24 +100,40 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an incorrect entered username
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsIncorrectUsernameMessageShown()
         {
             return IncorrectUsernameMessage != null;
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an empty entered username
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsEmptyUsernameMessageShown()
         {
             return EmptyUsernameMessage != null;
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an incorrect entered password
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsIncorrectPasswordMessageShown()
         {
             return IncorrectPasswordMessage != null;
         }
 
 
+        /// <summary>
+        /// Method that is waiting for a message about an empty entered password
+        /// </summary>
+        /// <returns>Is message shown or not</returns>
         public bool IsEmptyPasswordMessageShown()
         {
             return EmptyPasswordMessage != null;
