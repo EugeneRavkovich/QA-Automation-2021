@@ -180,9 +180,10 @@ namespace MailFramework.MailServices.Gmail.Helpers
         public Alias GetAliasFromMessage()
         {
             InboxPage inboxPage = new InboxPage(_driver);
-            inboxPage.OpenLastIncommingMessage();
-            var alias = inboxPage.GetMessageContent().Split(' ');
-            _driver.Navigate().Back();
+            MessageTab messageTab = inboxPage.OpenLastIncommingMessage();
+            var alias = messageTab.GetMessageContent().Split(' ');
+            //_driver.Navigate().Back();
+            messageTab.GetBackToTheInboxPage();
             return new Alias(alias[0], alias[1]);
         }
 

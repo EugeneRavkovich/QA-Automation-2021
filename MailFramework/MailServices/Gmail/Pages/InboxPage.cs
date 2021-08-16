@@ -98,17 +98,22 @@ namespace MailFramework.MailServices.Gmail.Pages
         }
 
 
-        public InboxPage OpenLastIncommingMessage()
+        public MessageTab OpenLastIncommingMessage()
         {
             LastIncommingMessage.Click();
-            return this;
+            return new MessageTab(Driver);
         }
 
-
-        public string GetMessageContent()
+        public void foo()
         {
-            return MessageContent.Text;
+            System.Console.WriteLine(Driver.Title);
         }
+
+        //public string GetMessageContent()
+        //{
+        //    Driver.Navigate().Refresh();
+        //    return MessageContent.Text;
+        //}
 
 
         public InboxPage OpenAvailableAccountsTab()

@@ -114,6 +114,7 @@
     <Compile Include="MailServices\Gmail\Pages\ChangeNameTab.cs" />
     <Compile Include="MailServices\Gmail\Pages\InboxPage.cs" />
     <Compile Include="MailServices\Gmail\Pages\LoginPage.cs" />
+    <Compile Include="MailServices\Gmail\Pages\MessageTab.cs" />
     <Compile Include="MailServices\MailRu\Helpers\MailruHelper.cs" />
     <Compile Include="MailServices\MailRu\Pages\InboxPage.cs" />
     <Compile Include="MailServices\MailRu\Pages\LoginPage.cs" />
