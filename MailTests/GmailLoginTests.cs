@@ -20,11 +20,11 @@ namespace MailTests
         public override void TearDown()
         {
             base.TearDown();
-            gmailHelper.CloseBrowser();
-            if(MailServiceBrowser.IsDriverExists("MailruBrowser"))
-            {
-                mailruHelper.CloseBrowser();
-            }
+            //gmailHelper.CloseBrowser();
+            //if(MailServiceBrowser.IsDriverExists("MailruBrowser"))
+            //{
+            //    mailruHelper.CloseBrowser();
+            //}
         } 
 
 
