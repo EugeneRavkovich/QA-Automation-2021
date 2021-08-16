@@ -9,8 +9,8 @@ namespace MailFramework.MailServices.Gmail.Pages
     {
         private IWebElement PersonalInformationTab =>
             Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
-                //By.XPath("(//a[@href='personal-info?gar=1'])[2]")));
-                By.XPath("//div[text()='Личная информация']/parent::a")));
+                By.XPath("(//a[@href='personal-info?gar=1'])[2]")));
+                //By.XPath("//div[text()='Личная информация']/parent::a")));
 
         private IWebElement NameField =>
             Wait.Until(ExpectedConditionsWrapper.ElementIsVisible(
