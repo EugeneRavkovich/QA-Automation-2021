@@ -32,8 +32,8 @@ namespace MailTests
         {
             base.TearDown();
             gmailHelper.ReplaceAliasBack(baseAlias);
-            //gmailHelper.CloseBrowser();
-            //mailruHelper.CloseBrowser();
+            gmailHelper.CloseBrowser();
+            mailruHelper.CloseBrowser();
         }
 
 

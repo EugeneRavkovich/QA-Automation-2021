@@ -21,8 +21,8 @@ namespace MailTests
         public override void TearDown()
         {
             base.TearDown();
-            //gmailHelper.CloseBrowser();
-            //mailruHelper.CloseBrowser();
+            gmailHelper.CloseBrowser();
+            mailruHelper.CloseBrowser();
         }
 
 
