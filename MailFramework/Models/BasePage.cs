@@ -11,7 +11,7 @@ namespace MailFramework.Models
         /// <summary>
         /// The maximum WebElement waiting time, in seconds
         /// </summary>
-        private readonly int _waitTime = 15;
+        private readonly int _waitTime = 30;
 
         /// <summary>
         /// Method for setting and getting a WebDriverWait object
